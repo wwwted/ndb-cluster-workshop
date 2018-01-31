@@ -2,3 +2,5 @@
 
 # Lab 1 - Install MySQL Cluster
 
+test
+test
