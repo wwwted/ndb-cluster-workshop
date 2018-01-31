@@ -1,4 +1,4 @@
-Welcome to MySQL NDB Cluster Workshop!
+Welcome to the MySQL NDB Cluster Workshop!
 ===================
 ![icon](https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/124px-MySQL.svg.png)
 
