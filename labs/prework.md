@@ -26,7 +26,7 @@ Once done you should see 2 Selected Software pieces in your shopping basket as s
 
 ![](./images/edelivery4.png)
 
-Click on shopping basket to access your software. Make sure all items are marked and pick "Platform" option Linux x86-64 as shown below and click "Continue".
+Click on shopping basket to access your software. Make sure all items are marked and pick "Platform" option "Linux x86-64" as shown below and click "Continue".
 
 ![](./images/edelivery5.png)
 
