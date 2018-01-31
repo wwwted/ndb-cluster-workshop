@@ -7,7 +7,7 @@ The presentations can be found in [docs](./docs) folder and hands on work in [la
 Feel free to star this page for future testing.
 
 To fully benefit (not mandatory) from hands-on work in this workshop its important that you have some prior experience with databases and are comfterble working in a Linux/Unix environment.
-Prework to attend hands-on work is described [here](/labs/prework-md).
+Prework to attend hands-on work is described [here](/labs/prework.md).
 
 ----------
 
