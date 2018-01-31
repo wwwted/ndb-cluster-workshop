@@ -14,7 +14,7 @@ In this exercise we are going to create our environment, start mcm and configure
                      mcmd.ini
 ```
 
-### Install MySQL Cluster and MCM
+### Install MySQL Cluster and MySQL Cluster Manager aka "MCM"
 Create a folder for the workshop
 ```
 mkdir MCM_LAB
@@ -35,9 +35,27 @@ mv
 mv
 ```
 
-• mv mcm-1.3.3-linux-glibc2.5-x86-64bit/mcm1.3.3 .
-• rmdir mcm-1.3.3-linux-glibc2.5-x86-64bit
-• cp /mcm1.3.3/etc/mcmd.ini .
-• Change manager-directory in mcmd.ini to /home/<user>/MCM_LAB/mcm_data
-• Start mcmd:
-./mcm1.3.3/bin/mcmd --defaults-file=./mcmd.ini --daemon
+Move MCM binaries folder to $MCM_LAB (replace X with real version number)
+```
+mv mcm-1.4.X-linux-glibc2.12-x86-64bit/mcm1.4.X .
+rmdir mcm-1.4.X-linux-glibc2.12-x86-64bit
+```
+
+Move MCM configuration file to $MCM_LAB top folder (replace X with real version number)
+```
+cp /mcm1.4.X/etc/mcmd.ini .
+```
+
+Edit MCM configuration before starting MCM daemon, manager-directory should be path to your MCM repository, you do not have to create the folder "mcm_data" as this is done at first start.
+```
+manager-directory = /home/<user>/MCM_LAB/mcm_data
+```
+Start MCM daemon (mcmd) (replace X with real version number)
+```
+./mcm1.4.X/bin/mcmd --defaults-file=./mcmd.ini --daemon
+```
+Grep for mcmd process and inspect end of log file and verify that mcmd started okay.
+```
+ps -wwaux | grep ssh | grep -v grep
+tail -50 mcmd.log
+```
