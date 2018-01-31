@@ -13,7 +13,7 @@ In this exercise we are going to create our environment, start mcm and configure
                      mcmd.ini
 ```
 
-### Install MySQL Cluster and MySQL Cluster Manager aka "MCM"
+### 1. Install MySQL Cluster and MySQL Cluster Manager aka "MCM"
 Create a folder for the workshop
 ```
 mkdir MCM_LAB
@@ -57,5 +57,5 @@ ps -wwaux | grep ssh | grep -v grep
 tail -50 mcmd.log
 ```
 
-### Configuring MySQL Cluster
+### 2. Configuring MySQL Cluster
 
