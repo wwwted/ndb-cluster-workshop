@@ -8,7 +8,6 @@ In this exercise we are going to create our environment, start mcm and configure
 ```
 /home/<user>/MCM_LAB/
                      cluster-75X/ (replace X with real version number)
-                     cluster-75X/ (replace X with real version number)
                      mcm1.4.X/
                      mcm_data/
                      mcmd.ini
@@ -24,15 +23,13 @@ cd MCM_LAB
 Extract mysql cluster manager and cluster binaries from tar files
 (first step is to unzip tar packages from tar files)
 ```
-tar xzf /path/to/cluster/binaries/
-tar xzf /path/to/cluster/binaries/
+tar xzf /path/to/cluster/binaries/mysql-cluster-advanced-7.5.X-linux-glibc2.12-x86_64.tar.gz
 tar xzf /path/to/cluster/binaries/mcm-1.4.X-linux-glibc2.12-x86-64bit.tar.gz
 ```
 
-Rename cluster binaries to cluster-75X and cluster-75X (replace X with real version number)
+Rename cluster binaries to cluster-75X (replace X with real version number)
 ```
-mv 
-mv
+mv mysql-cluster-advanced-7.5.X-linux-glibc2.12-x86_64.tar.gz cluster-75X
 ```
 
 Move MCM binaries folder to $MCM_LAB (replace X with real version number)
@@ -59,3 +56,6 @@ Grep for mcmd process and inspect end of log file and verify that mcmd started o
 ps -wwaux | grep ssh | grep -v grep
 tail -50 mcmd.log
 ```
+
+### Configuring MySQL Cluster
+
