@@ -34,7 +34,7 @@ Accept Oracle legal terms, make sure you scroll down and press button to accept 
 
 ![](./images/edelivery6.png)
 
-Download software packages by pressing on link, this will trigger your download manager to start, start by downloading lastest version of MySQL Cluster 7.5.X TAR for Generic Linux x86 (64-bit).
+Download software packages by pressing on link (zip package) as show below (do not use Download button), this will trigger your download manager to start downloading the software, start by downloading lastest version of MySQL Cluster 7.5.X TAR for Generic Linux x86 (64-bit).
 
 ![](./images/edelivery7.png)
 
