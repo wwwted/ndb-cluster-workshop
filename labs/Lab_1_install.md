@@ -1,4 +1,4 @@
-  **[Back to Agenda](./../README.md)**
+**[Back to Agenda](./../README.md)**
 
 # Lab 1 - Install MySQL Cluster
 
@@ -59,3 +59,4 @@ tail -50 mcmd.log
 
 ### 2. Configuring MySQL Cluster
 
+**[Back to Agenda](./../README.md)**
