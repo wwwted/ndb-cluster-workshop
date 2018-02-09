@@ -32,21 +32,21 @@ Agenda for today:
 * Getting Started: configuration/install/start/stop
   * Lecture
   * [Lab 1 - Install](./labs/Lab_1_install.md)
-  * [Lab 2 - Create Cluster](./labs/Lab_1_create.md)
+  * [Lab 2 - Create Cluster](./labs/Lab_2_create.md)
 
 * Administration: backup/upgrade/logs/conf/sizing
   * Lecture
-  * [Lab 2 - Administration](./labs/Lab_2_admin.md)  
+  * [Lab 2 - Administration](./labs/Lab_3_admin.md)  
 
 * Monitoring: surveillance and problem solving
   * Lecture
-  * [Lab 3 - Monitoring](./labs/Lab_3_mon.md) 
+  * [Lab 3 - Monitoring](./labs/Lab_4_mon.md) 
 
 * Best practices: architectures and case studies
   * Lecture
 
 * Geo Replication: asynchronous replication and conflict resolution
   * Lecture
-  * Not part of 1-day workshop [Lab 4 - Replication](./labs/Lab_4_replication.md)
+  * Not part of 1-day workshop [Lab 5 - Replication](./labs/Lab_4_replication.md)
  
  
