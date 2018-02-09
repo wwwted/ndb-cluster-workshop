@@ -6,8 +6,19 @@ In this workshop, you will learn about MySQL Cluster. This workshop is a blend o
 The presentations can be found in [docs](./docs) folder and hands on work in [labs](./labs) folder.
 Feel free to bookmark (star) this page for future testing.
 
-To fully benefit (not mandatory) from hands-on work in this workshop its important that you have some prior experience with databases and are comfterble working in a Linux/Unix environment.
+To fully benefit (not mandatory) from hands-on work in this workshop its important that you have some prior experience with databases and are comfortable working in a Linux/Unix environment.
 Prework to attend hands-on work is described [here](/labs/prework.md).
+
+If you want to know more about MySQL Cluster I recommend these 2 books:
+- [Pro MySQL NDB Cluster](https://www.apress.com/br/book/9781484229811)
+- [MySQL Cluster 7.5 inside and out](https://www.adlibris.com/se/bok/mysql-cluster-75-inside-and-out-mysql-cluster-75-inside-and-out-9789176997574)
+
+Blogs and our manuals:
+- https://www.mysql.com/products/cluster/ 
+- https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster.html
+- http://mikaelronstrom.blogspot.co.uk/
+- https://mysqlhighavailability.com/category/mysql-cluster/
+
 
 ----------
 
