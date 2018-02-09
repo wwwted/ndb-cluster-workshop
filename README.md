@@ -32,6 +32,7 @@ Agenda for today:
 * Getting Started: configuration/install/start/stop
   * Lecture
   * [Lab 1 - Install](./labs/Lab_1_install.md)
+  * [Lab 2 - Create Cluster](./labs/Lab_1_create.md)
 
 * Administration: backup/upgrade/logs/conf/sizing
   * Lecture
