@@ -40,7 +40,7 @@ rmdir mcm-1.4.X-linux-glibc2.12-x86-64bit
 
 Move MCM configuration file to $MCM_LAB top folder (replace X with real version number)
 ```
-cp /mcm1.4.X/etc/mcmd.ini .
+cp mcm1.4.X/etc/mcmd.ini .
 ```
 
 Edit MCM configuration before starting MCM daemon, manager-directory should be path to your MCM repository, you do not have to create the folder "mcm_data" as this is done at first start by mcmd.
