@@ -57,6 +57,4 @@ ps -wwaux | grep ssh | grep -v grep
 tail -50 mcmd.log
 ```
 
-### 2. Configuring MySQL Cluster
-
 **[Back to Agenda](./../README.md)**
