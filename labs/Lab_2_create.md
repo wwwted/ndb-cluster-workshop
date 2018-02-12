@@ -146,17 +146,17 @@ The central cluster logfile can be located in directory for management node (Nod
 Other local log files for the processes of our cluster are located under `data/` folder for each process.
 
 #### Handling the configuration after initial install
-You should never attempt to alter the local configuration files directly, this will break your cluster. Use `SET/GET` commands to work with configuration of your Cluser. MCM will take of any needed restarts due to changing a configuration parameter. Type of cluster restart needed for configuration changes is dependant on the parameter, you can see all data node parameters [here](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-params-ndbd.html), Section **Restart Type**.
+You should never attempt to alter the local configuration files directly, this will break your cluster. Use `set/get` commands to work with configuration of your Cluser. MCM will take of any needed restarts due to changing a configuration parameter. Type of cluster restart needed for configuration changes is dependant on the parameter, you can see all data node parameters [here](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-params-ndbd.html), Section **Restart Type**.
 
 Look at configuration parameters set for the cluster
 ```
 mcm> get mycluster;
 ```
-By adding options `-d` mcm wil also print all configarion (parameters using default values), warning - this is a long list!
+By adding options `-d` mcm wil also print all configarion (parameters using default values).
 ```
 mcm> get -d mycluster;
 ```
-You can retrieve all values for specific type of processes by adding process type to the get command
+You can retrieve all values for specific type of processes by adding process type to the `get` command
 ```
 mcmd> get :ndbmtd mycluster;
 ```
@@ -173,7 +173,7 @@ mcm> get port:mysqld mycluster;
 mcm> get port:mysqld:50 mycluster;
 ```
 
-To update the configuration we use the `SET` command. The syntax is similar to `GET` command above.
+To update the configuration we use the `set` command. The syntax is similar to `get` command above.
 ```
 mcm> set <PARAM>:[ndbmtd|mysqld|ndb_mgmd]=<VALUE> mycluster;
 ```
