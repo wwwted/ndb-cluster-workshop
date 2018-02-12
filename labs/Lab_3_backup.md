@@ -15,5 +15,14 @@ Our reference manual can be found [here](https://dev.mysql.com/doc/mysql-cluster
 ```
 ./mcm/bin/mcm
 ```
+Run a full backup of the cluster:
+```
+mcm> backup cluster mycluster;
+```
+
+List backups:
+```
+mcm> list backups mycluster;
+```
 
 **[Back to Agenda](./../README.md)**
