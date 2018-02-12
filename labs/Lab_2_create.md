@@ -5,7 +5,7 @@
 
 In this exercise we are going to configure and start the cluster. This can be done from any server, even remotely as long as you can connect to one of the mcmd daemons running on your cluster servers installed earlier.
 
-###  Configure our Cluster using MCM
+#####  The MCM client
 
 Start the mcm client
 If you want to see help run `./mcm/bin/mcm --help`
@@ -22,6 +22,8 @@ Once connected you can look at all commands available by running:
 ```
 mcm> list commands;
 ```
+
+##### Configure Cluster
 
 First step before we can start configuring our cluster is to create a site that contains all the hosts that will be part of our cluster. In our simple demo we only have one host (localhost or 127.0.0.01) and lets call our site `mysite`.
 ```
@@ -47,7 +49,7 @@ Next step is to create our cluster, this is done with the `create cluster` comma
 Lets use the package we created earlier called `cluster758` and lets name our cluster mycluster.
 The argument `--processhosts` takes a list of `processtype@host`as argument, the type of processes are ndb, ndbmtd, ndb_mgmd, mydsqld and api.
 
-We will create a cluster with below processsed all running on local server (127.0.0.1):
+We will create a cluster with below processses, all processes running on local server (127.0.0.1):
 - 1 management node (ndb_mgmd)
 - 2 data nodes (ndbmtd)
 - 2 MySQL API nodes (mysqld)
@@ -66,3 +68,64 @@ You might wonder about the number `50`and `51`, these are so called Node ID that
 mcm> set port:mysqld:50=3310 mycluster;
 mcm> set port:mysqld:51=3311 mycluster;
 ```
+
+##### Start Cluster
+
+Before we start the cluster, look at layout of the configured cluster.
+```
+mcm> show status -r mycluster;
+```
+We can also look at all parameters set in configuration.
+```
+mcm> get mycluster;
+```
+If all looks good lets go ahead and start the cluster.
+```
+mcm> start cluster --background mycluster;
+```
+Now we can run:
+```
+mcm> show status -r mycluster;
+```
+And see how the processes are starting.
+Once all processes have started you should see `Status` being `Running` for the management, data and MySQL nodes as shown below.
+```
+mcm> show status -r mycluster;
++--------+----------+------------+---------+-----------+------------+
+| NodeId | Process | Host        | Status  | Nodegroup | Package    |
++--------+----------+------------+---------+-----------+------------+
+| 49     | ndb_mgmd | 127.0.0.1  | running |           | cluster758 |
+| 1      | ndbmtd   | 127.0.0.1  | running | 0         | cluster758 |
+| 2      | ndbmtd   | 127.0.0.1  | running | 0         | cluster758 |
+| 50     | mysqld   | 127.0.0.1  | running |           | cluster758 |
+| 51     | mysqld   | 127.0.0.1  | running |           | cluster758 |
+| 52     | ndbapi   | *127.0.0.1 | added   |           |            |
+| 53     | ndbapi   | *127.0.0.1 | added   |           |            |
+| 54     | ndbapi   | *127.0.0.1 | added   |           |            |
+| 55     | ndbapi   | *127.0.0.1 | added   |           |            |
++--------+----------+------------+---------+-----------+------------+
+```
+
+##### Automate the configuration/start of cluster (Not part of workshop)
+We can put all MCM commands in one file:
+```
+create site --hosts=127.0.0.1 mysite;
+add package --basedir=/home/<user>/MCM_LAB/cluster-758 cluster758;
+create cluster --package=cluster758 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
+add process --processhosts=mysqld@127.0.0.1,mysqld@127.0.0.1 mycluster;
+add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
+add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
+set port:mysqld:50=3310 mycluster;
+set port:mysqld:51=3311 mycluster;
+```
+Copy commands above into a file mcm.cmds or download file from [here](https://gist.github.com/wwwted/1ee83009d7344c1348aae41df655d839).
+
+This file can be put in any version handling system and be part of your prefered deployment framework.
+Run the file with mcm commands using the mcm client like:
+```
+mcm -a host:port < mcm.cmds
+```
+
+##### Finding your way around the environment
+
+##### Handeling the configuration after initial install
