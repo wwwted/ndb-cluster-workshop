@@ -19,10 +19,36 @@ Run a full backup of the cluster:
 ```
 mcm> backup cluster mycluster;
 ```
-
-List backups:
+If you have 2 mcm windows open you can track progress by running:
+```
+mcm> show status --progress mycluster;
+```
+Once the backup is done use `list backups` to list stored backups:
 ```
 mcm> list backups mycluster;
 ```
+
+Log into MySQL client:
+```
+mysql -uroot -proot -h127.0.0.1 -P3310
+```
+And create some data:
+```
+mysql> create database lab;
+mysql> use lab;
+mysql> create table t1 (i int) engine=ndbcluster;
+mysql> insert into t1 values (1),(2),(3);
+```
+
+Lets create a backup to make sure we can recover in case of disaster
+```
+mcm> backup cluster mycluster;
+```
+Disaster strikes!
+```
+mysql -uroot -proot -h127.0.0.1 -P3310 -se"drop database test"
+```
+
+
 
 **[Back to Agenda](./../README.md)**
