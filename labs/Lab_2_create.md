@@ -185,7 +185,7 @@ Set *MemReportFrequency* to 10 and *FragmentLogFileSize* to 24M for both NDBMTD,
 ```
 mcm> set FragmentLogFileSize:ndbmtd=24M,MemReportFrequency:ndbmtd=10 mycluster;
 ```
-You can monitor the progress or restart by running:
+You can monitor the progress of restart by running:
 ```
 mcm> show status --progress mycluster
 mcm> show status --progressbar mycluster;
