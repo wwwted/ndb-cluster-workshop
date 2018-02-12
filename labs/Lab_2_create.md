@@ -192,4 +192,4 @@ mcm> show status --progressbar mycluster;
 ```
 Above show status `--progress` can be used for many commands in MCM.
 
-Set *MemReportFrequency* back to default value (0).
+Set *MemReportFrequency* parameter back to default (0).
