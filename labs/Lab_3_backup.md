@@ -40,15 +40,26 @@ mysql> create table t1 (i int) engine=ndbcluster;
 mysql> insert into t1 values (1),(2),(3);
 ```
 
-Lets create a backup to make sure we can recover in case of disaster
+Lets create a backup (in mcm client) to make sure we can recover in case of disaster
 ```
 mcm> backup cluster mycluster;
 ```
 Disaster strikes!
 ```
-mysql -uroot -proot -h127.0.0.1 -P3310 -se"drop database test"
+mysql -uroot -proot -h127.0.0.1 -P3310 -se"drop database lab"
 ```
-
-
+Lets recover from last backup, first look at available backups and pick the last one, note the *BackupId*
+```
+mcm> list backups mycluster;
+```
+Next step is to use recover the data using *BackupId* from above
+```
+mcm> restore cluster --backupid=3 --background mycluster;
+```
+During recovery is running look at:
+```
+mcm> show status --progressbar mycluster;
+```
+If you want to re-run recovery just run the Disaster statment over again ;)
 
 **[Back to Agenda](./../README.md)**
