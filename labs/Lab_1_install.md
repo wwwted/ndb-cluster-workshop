@@ -2,7 +2,9 @@
 
 # Lab 1 - Install MySQL Cluster
 
-In this exercise we are going to create our environment, start mcm and configure our cluster.
+In this exercise we are going to create our environment, configure and start mcm daemon. Next steps will be to configure and start our cluster.
+
+Steps below need to be done on all servers that are to be part of the MySQL Cluster, in this workshop we run the complete cluster on one server but for a production environment you would need at least 3 servers and need to do the installation as described below on all 3 servers.
 
 ### Target environment for HOL
 ```
