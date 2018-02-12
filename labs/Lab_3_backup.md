@@ -6,7 +6,7 @@ Backup and restore of NDB Cluster can be done centralized by MySQL Cluster Manag
 
 As NDB Cluster is a distributed database, the backup is also a distributed where each datanode will backup it's part of the complete dataset. Important that you make sure all parts of the backup are stored in a safe manner.
 
-Local data/metadata in MySQL API nodes are not part of NDB backup, this data must be handles separately. This data can be secured by using [mysqldump](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html) separately.
+Local data/metadata in MySQL API nodes are not part of NDB backup, this data must be handled separately. This data can be secured by using [mysqldump](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html) separately.
 
 #### Backup and Recovery
 
