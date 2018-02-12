@@ -36,11 +36,12 @@ Agenda for today:
 
 * Administration: backup/upgrade/logs/conf/sizing
   * Lecture
-  * [Lab 2 - Administration](./labs/Lab_3_admin.md)  
+  * [Lab 3 - Backup](./labs/Lab_3_backup.md)
+  * [Lab 4 - Upgrade](./labs/Lab_4_upgrade.md)
 
 * Monitoring: surveillance and problem solving
   * Lecture
-  * [Lab 3 - Monitoring](./labs/Lab_4_mon.md) 
+  * [Lab 5 - Monitoring](./labs/Lab_5_mon.md)
 
 * Best practices: architectures and case studies
   * Lecture
