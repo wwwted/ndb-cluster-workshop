@@ -5,7 +5,7 @@
 
 In this exercise we are going to configure and start the cluster. This can be done from any server, even remotely as long as you can connect to one of the mcmd daemons running on your cluster servers installed earlier.
 
-#####  The MCM client
+#### The MCM client
 
 Start the mcm client
 If you want to see help run `./mcm/bin/mcm --help`
@@ -23,7 +23,7 @@ Once connected you can look at all commands available by running:
 mcm> list commands;
 ```
 
-##### Configure Cluster
+#### Configure Cluster
 
 First step before we can start configuring our cluster is to create a site that contains all the hosts that will be part of our cluster. In our simple demo we only have one host (localhost or 127.0.0.01) and lets call our site `mysite`.
 ```
@@ -69,7 +69,7 @@ mcm> set port:mysqld:50=3310 mycluster;
 mcm> set port:mysqld:51=3311 mycluster;
 ```
 
-##### Start Cluster
+#### Start Cluster
 
 Before we start the cluster, look at layout of the configured cluster.
 ```
@@ -106,7 +106,7 @@ mcm> show status -r mycluster;
 +--------+----------+------------+---------+-----------+------------+
 ```
 
-##### Automate the configuration/start of cluster (Not part of workshop)
+#### Automate the configuration/start of cluster (Not part of workshop)
 We can put all MCM commands in one file:
 ```
 create site --hosts=127.0.0.1 mysite;
@@ -126,6 +126,35 @@ Run the file with mcm commands using the mcm client like:
 mcm -a host:port < mcm.cmds
 ```
 
-##### Finding your way around the environment
+#### Finding your way around the environment
+The cluster data for cluster processes are installed under folder `./mcm_data/clusters/`.
+Structure is:
+```
+mcd_data/
+        clusters/
+                 mycluster/
+                           <Process NodeID>
+                                           data/
+                                           logs/
+                                           tmp/
+                           ...
+```
+Node ID's for our cluster are shown by running command `show status -r mycluster`
 
-##### Handeling the configuration after initial install
+The central cluster logfile can be located in directory for management node (Node-ID 49) `mcm_data/clusters/mycluster/49/data/ndb_49_cluster.log`
+
+Other local log files for the processes of our cluster are located under `data/` folder for each process.
+
+#### Handling the configuration after initial install
+You should never attempt to alter the local configuration files directly, this will break your cluster. Use SET/GET commands to work with configuration of your Cluser. MCM will take of any needed restarts due to changing a configuration parameter. Restart type needed for different parameters is different, you can see data node parameters [here](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-params-ndbd.html), Section **Restart Type**.
+
+Look at configuration parameters set for the cluster
+```
+mcm> get mycluster;
+```
+By adding options -d mcm wil also print all configarion (parameters using default values), warning - this is a long list!
+```
+mcm> get -d mycluster;
+```
+
+
