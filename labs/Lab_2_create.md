@@ -86,6 +86,8 @@ mcm> start cluster --background mycluster;
 Now we can run:
 ```
 mcm> show status -r mycluster;
+mcm> show status --progress mycluster;
+mcm> show status --progressbar mycluster;
 ```
 And see how the processes are starting.
 Once all processes have started you should see `Status` being `Running` for the management, data and MySQL nodes as shown below.
@@ -104,6 +106,11 @@ mcm> show status -r mycluster;
 | 54     | ndbapi   | *127.0.0.1 | added   |           |            |
 | 55     | ndbapi   | *127.0.0.1 | added   |           |            |
 +--------+----------+------------+---------+-----------+------------+
+```
+After our cluster is up and running it's time to set some passwords for MySQL API nodes
+```
+./cluster-758/bin/mysqladmin -h127.0.0.1 -P3310 -uroot password 'root'
+./cluster-758/bin/mysqladmin -h127.0.0.1 -P3311 -uroot password 'root'
 ```
 
 #### Automate the configuration/start of cluster (Not part of workshop)
