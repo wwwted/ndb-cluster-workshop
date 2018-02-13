@@ -153,7 +153,7 @@ The central cluster logfile can be located in directory for management node (Nod
 Other local log files for the processes of our cluster are located under `data/` folder for each process.
 
 #### Handling the configuration after initial install
-You should never attempt to alter the local configuration files directly, this will break your cluster. Use `set/get` commands to work with configuration of your Cluser. MCM will take of any needed restarts due to changing a configuration parameter. Type of cluster restart needed for configuration changes is dependant on the parameter, you can see all data node parameters [here](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-params-ndbd.html), Section **Restart Type**.
+You should never attempt to alter the local configuration files directly, this will break your cluster. Use `set/get` commands to work with configuration of your Cluser. MCM will take of any needed restarts due to changing a configuration parameter. Type of cluster restart needed for configuration changes is dependant on the parameter, you can see all data node parameters [here](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-params-ndbd.html), under section **Restart Type** your will see restart type needed.
 
 Look at configuration parameters configured for the cluster
 ```
