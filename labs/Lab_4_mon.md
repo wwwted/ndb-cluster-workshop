@@ -83,7 +83,7 @@ mysql> SELECT * from ndbinfo.memoryusage;
 *memory_per_fragment*  
 Memory usage by individual fragments. This table can be used for seeing memory usage for all "user defined" tables with query below.
 ```
-mysql> SELECT fq_name as TableName, sum(var_elem_alloc_bytes) as VarMem,  SUM(fixed_elem_alloc_bytes) as FixedMem, SUM(hash_index_alloc_bytes) as IndexMEM  from memory_per_fragment WHERE type="User table" GROUP BY fq_name;
+mysql> SELECT fq_name as TableName, SUM(var_elem_alloc_bytes) as VarMem, SUM(fixed_elem_alloc_bytes) as FixedMem, SUM(hash_index_alloc_bytes) as IndexMEM  from memory_per_fragment WHERE type="User table" GROUP BY fq_name;
 +---------------------------------+--------+----------+----------+
 | TableName                       | VarMem | FixedMem | IndexMEM |
 +---------------------------------+--------+----------+----------+
