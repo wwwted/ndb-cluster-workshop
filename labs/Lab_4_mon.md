@@ -1,20 +1,17 @@
 **[Back to Agenda](./../README.md)**
 
-# Lab 3 - Backup a MySQL Cluster
+# Lab 4 - Monitoring a MySQL Cluster
 
-Backup and restore of NDB Cluster can be done centralized by MySQL Cluster Manager. NDB also have native backup and restore for community edition of NDB, more details [here](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-backup.html).
+Monitoring NBD Cluster can be done by using [MySQL Enterprise Monitor](https://www.mysql.com/products/enterprise/monitor.html). MySQL Enterprise Monitor is a graphical monitoring system that can be used to get a high level view of your cluster status, it can also fire off alarms if something is not working correctly.
 
-As NDB Cluster is a distributed database, the backup is also a distributed where each datanode will backup it's part of the complete dataset. Important that you make sure all parts of the backup are stored in a safe manner.
+Low level diagnostics on what is happening in MySQL cluster is available via a set of tables in the `ndbinfo` schema. All tables in `ndbinfo` schema are described in detail in our [manual](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-ndbinfo.html). 
 
-Local data/metadata in MySQL API nodes are not part of NDB backup, this data must be handled separately. This data can be secured by using [mysqldump](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html) separately.
+#### NDBINFO tables
 
-#### Backup and Recovery
-
-Start the mcm client
-If you want to see help run `./mcm/bin/mcm --help`
-Our reference manual can be found [here](https://dev.mysql.com/doc/mysql-cluster-manager/1.4/en/mcm-cluster-commands.html).
+Start the MySQL client
+If you want to see help run `mysql --help`
 
 ```
-./mcm/bin/mcm
+mysql -uroot -proot ndbinfo
 ```
-Run a full backup of the cluster:
+
