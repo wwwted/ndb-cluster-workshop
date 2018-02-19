@@ -8,6 +8,8 @@ As NDB Cluster is a distributed database, the backup is also a distributed where
 
 Local data/metadata in MySQL API nodes are not part of NDB backup, this data must be handled separately. This data can be secured by using [mysqldump](https://dev.mysql.com/doc/refman/5.7/en/mysqldump.html) separately.
 
+**Attention:** Remember to set the PATH env varaible manualy or by using bash>. ./setenv before trying to start mcm client, mcm client need to find the mysql client.
+
 #### Backup and Recovery
 
 Start the mcm client
