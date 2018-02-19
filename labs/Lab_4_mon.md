@@ -11,6 +11,12 @@ Low level diagnostics on what is happening in MySQL cluster is available via a s
 Start the MySQL client (if you want to see 'help' run `mysql --help`)
 
 ```
-mysql -uroot -proot ndbinfo
+mysql -uroot -proot -P3311 -h127.0.0.1 ndbinfo
+or provide socket file like:
+mysql -uroot -proot -S/tmp/mysql.mycluster.50.sock  ndbinfo
 ```
 
+Memory usage, first command will list index/data memory usage per data nodes
+```
+
+```
