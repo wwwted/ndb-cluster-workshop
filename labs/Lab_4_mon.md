@@ -44,6 +44,23 @@ mysql> select * from threads;
 |       2 |      2 | ldm         | ldm thread, handling a set of data partitions                    |
 |       2 |      3 | recv        | receive thread, performing receieve and polling for new receives |
 +---------+--------+-------------+------------------------------------------------------------------+
+```
+The threads table is usually joined with *cpuststat* and *threadstat* tables on node_id and thr_no to print column thread_name for clarity like:
+```
+mysql> select t.node_id, t.thread_name,c.OS_user,c.OS_system,c.OS_idle from cpustat c join threads t on t.node_id=c.node_id AND t.thr_no=c.thr_no;
++---------+-------------+---------+-----------+---------+
+| node_id | thread_name | OS_user | OS_system | OS_idle |
++---------+-------------+---------+-----------+---------+
+|       1 | main        |       0 |         1 |      99 |
+|       1 | rep         |       0 |         1 |      99 |
+|       1 | ldm         |       0 |         1 |      99 |
+|       1 | recv        |       2 |         2 |      96 |
+|       2 | main        |       0 |         1 |      99 |
+|       2 | rep         |       0 |         1 |      99 |
+|       2 | ldm         |       0 |         1 |      99 |
+|       2 | recv        |       2 |         2 |      96 |
++---------+-------------+---------+-----------+---------+
+8 rows in set (0,03 sec)
 
 ```
 
