@@ -8,7 +8,7 @@ Low level diagnostics on what is happening in MySQL cluster is available via a s
 
 #### NDBINFO tables
 
-Start the MySQL client (If you want to see help run `mysql --help`)
+Start the MySQL client (if you want to see 'help' run `mysql --help`)
 
 ```
 mysql -uroot -proot ndbinfo
