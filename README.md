@@ -40,7 +40,7 @@ Agenda for today:
 
 * Monitoring: surveillance and problem solving
   * Lecture
-  * [Lab 4 - Monitoring](./labs/Lab_4_mon.md)
+  * [Lab 4 - Monitoring](./labs/Lab_4_mon.md)
   * [Lab 5 - Benchmark](./labs/Lab_5_bench.md)
   * [Lab 6 - Add more capacity](./labs/Lab_6_add.md)
 
