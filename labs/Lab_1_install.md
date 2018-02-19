@@ -61,6 +61,10 @@ Create simple file to set the path to the binaries, name it `setenv` and put it 
 EXPORT PATH=/home/<user>/MCM_LAB/cluster-75X/bin:/home/<user>/MCM_LAB/mcm/bin:$PATH
 ```
 (remember to exchange `<user>` and version numbers above with real values) 
+You will need to run below command (or manually set the PATH) in all terminals before trying to access mcm otherwice it will not be able to locate mysql client.
+```
+bash> . ./setenv
+```
 
 Start MCM daemon (mcmd) (replace X with real version number)
 ```
