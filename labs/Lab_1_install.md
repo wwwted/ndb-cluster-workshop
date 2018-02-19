@@ -13,6 +13,7 @@ Steps below need to be done on all servers that are to be part of the MySQL Clus
                      mcm1.4.X/
                      mcm_data/
                      mcmd.ini
+                     setenv
 ```
 
 ### 1. Install MySQL Cluster and MySQL Cluster Manager aka "MCM"
@@ -49,6 +50,12 @@ Edit MCM configuration before starting MCM daemon, manager-directory should be p
 ```
 manager-directory = /home/<user>/MCM_LAB/mcm_data
 ```
+Create simple file to set the path to the binaries, name it `setenv` and put it in your MCM_LAB/ folder
+```
+EXPORT PATH=/home/<user>/MCM_LAB/cluster-75X/bin:/home/<user>/MCM_LAB/mcm/bin:$PATH
+```
+(remember to exchange `<user>` and version numbers above with real values) 
+
 Start MCM daemon (mcmd) (replace X with real version number)
 ```
 ./mcm1.4.X/bin/mcmd --defaults-file=./mcmd.ini --daemon
