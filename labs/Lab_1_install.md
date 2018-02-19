@@ -46,7 +46,7 @@ Create a soft link called only `mcm` that point to folder mcm1.4.X like
 ```
 ln -s mcm1.4.X mcm
 ```
-You should se the folowing folders under mcm catalouge:
+You should se the folowing folders under mcm catalogue:
 ```
 bash$ ls mcm/
 bin  etc  lib  libexec  licenses  share  var
