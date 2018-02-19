@@ -11,6 +11,7 @@ Steps below need to be done on all servers that are to be part of the MySQL Clus
 /home/<user>/MCM_LAB/
                      cluster-75X/ (replace X with real version number)
                      mcm1.4.X/
+                     mcm -> /home/<user>/MCM_LAB/mcm1.4.X
                      mcm_data/
                      mcmd.ini
                      setenv
