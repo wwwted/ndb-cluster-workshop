@@ -11,8 +11,8 @@ In this exercise we are going to configure and start the cluster. This can be do
 #### The MCM client
 
 Start the mcm client
-If you want to see help run `./mcm/bin/mcm --help`
-Our reference manual can be found [here](https://dev.mysql.com/doc/mysql-cluster-manager/1.4/en/mcm-cluster-commands.html).
+If you want to see help run `./mcm/bin/mcm --help`, 
+our reference manual can be found [here](https://dev.mysql.com/doc/mysql-cluster-manager/1.4/en/mcm-cluster-commands.html).
 
 ```
 ./mcm/bin/mcm
