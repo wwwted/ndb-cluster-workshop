@@ -28,6 +28,24 @@ mysql> select * from nodes;
 |       2 |   1205 | STARTED |           0 |                 0 |
 +---------+--------+---------+-------------+-------------------+
 ```
+*threads*  
+The threads table provides information about threads running in the NDB kernel.
+```
+mysql> select * from threads;
++---------+--------+-------------+------------------------------------------------------------------+
+| node_id | thr_no | thread_name | thread_description                                               |
++---------+--------+-------------+------------------------------------------------------------------+
+|       1 |      0 | main        | main thread, schema and distribution handling                    |
+|       1 |      1 | rep         | rep thread, asynch replication and proxy block handling          |
+|       1 |      2 | ldm         | ldm thread, handling a set of data partitions                    |
+|       1 |      3 | recv        | receive thread, performing receieve and polling for new receives |
+|       2 |      0 | main        | main thread, schema and distribution handling                    |
+|       2 |      1 | rep         | rep thread, asynch replication and proxy block handling          |
+|       2 |      2 | ldm         | ldm thread, handling a set of data partitions                    |
+|       2 |      3 | recv        | receive thread, performing receieve and polling for new receives |
++---------+--------+-------------+------------------------------------------------------------------+
+
+```
 
 *memoryusage*  
 This table contains index/data memory usage per data nodes (node_id 1 and 2 are our 2 data nodes).
@@ -60,5 +78,23 @@ mysql> SELECT fq_name as TableName, sum(var_elem_alloc_bytes) as VarMem,  SUM(fi
 +---------------------------------+--------+----------+----------+
 ```
 
+*config_nodes*  
+MySQL Cluster nodes currently configured in the config.ini. This table does not say anything about the state of the nodes.
 
+```
+mysql> select * from config_nodes;
++---------+-----------+---------------+
+| node_id | node_type | node_hostname |
++---------+-----------+---------------+
+|       1 | NDB       | 127.0.0.1     |
+|       2 | NDB       | 127.0.0.1     |
+|      49 | MGM       | 127.0.0.1     |
+|      50 | API       | 127.0.0.1     |
+|      51 | API       | 127.0.0.1     |
+|      52 | API       | 127.0.0.1     |
+|      53 | API       | 127.0.0.1     |
+|      54 | API       | 127.0.0.1     |
+|      55 | API       | 127.0.0.1     |
++---------+-----------+---------------+
+```
 
