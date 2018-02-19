@@ -146,7 +146,7 @@ mcd_data/
                                            tmp/
                            ...
 ```
-Node ID's for our cluster are shown by running command `show status -r mycluster`
+Node ID's for processes in our cluster are shown by running command `show status -r mycluster`
 
 The central cluster logfile can be located in directory for management node (Node-ID 49) `mcm_data/clusters/mycluster/49/data/ndb_49_cluster.log`
 
