@@ -12,7 +12,7 @@ Start the MySQL client (if you want to see 'help' run `mysql --help`)
 
 ```
 mysql -uroot -proot -P3311 -h127.0.0.1 ndbinfo
-or provide socket file like:
+  or provide socket file like:
 mysql -uroot -proot -S/tmp/mysql.mycluster.50.sock  ndbinfo
 ```
 
