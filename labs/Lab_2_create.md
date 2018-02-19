@@ -197,7 +197,7 @@ You can monitor the progress of restart by running:
 mcm> show status --progress mycluster
 mcm> show status --progressbar mycluster;
 ```
-Above show status `--progress` can be used for many commands in MCM.
+Above `show status --progress` command can be used to see progress for many ohter commands in MCM also.
 
 Set *MemReportFrequency* parameter back to default (0).
 
