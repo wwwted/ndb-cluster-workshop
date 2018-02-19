@@ -9,6 +9,7 @@ Low level diagnostics on what is happening in MySQL cluster is available via a s
 #### NDBINFO tables
 
 Start the MySQL client
+
 If you want to see help run `mysql --help`
 
 ```
