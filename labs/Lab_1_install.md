@@ -41,15 +41,21 @@ mv mcm-1.4.X-linux-glibc2.12-x86-64bit/mcm1.4.X .
 rmdir mcm-1.4.X-linux-glibc2.12-x86-64bit
 ```
 
+Create a soft link called only `mcm` that point to folder mcm1.4.X like
+```
+ln -s mcm1.4.X mcm
+```
+
 Move MCM configuration file to $MCM_LAB top folder (replace X with real version number)
 ```
-cp mcm1.4.X/etc/mcmd.ini .
+cp mcm/etc/mcmd.ini .
 ```
 
 Edit MCM configuration before starting MCM daemon, manager-directory should be path to your MCM repository, you do not have to create the folder "mcm_data" as this is done at first start by mcmd.
 ```
 manager-directory = /home/<user>/MCM_LAB/mcm_data
 ```
+
 Create simple file to set the path to the binaries, name it `setenv` and put it in your MCM_LAB/ folder
 ```
 EXPORT PATH=/home/<user>/MCM_LAB/cluster-75X/bin:/home/<user>/MCM_LAB/mcm/bin:$PATH
@@ -58,8 +64,9 @@ EXPORT PATH=/home/<user>/MCM_LAB/cluster-75X/bin:/home/<user>/MCM_LAB/mcm/bin:$P
 
 Start MCM daemon (mcmd) (replace X with real version number)
 ```
-./mcm1.4.X/bin/mcmd --defaults-file=./mcmd.ini --daemon
+./mcm/bin/mcmd --defaults-file=./mcmd.ini --daemon
 ```
+
 Grep for mcmd process and inspect end of log file and verify that mcmd started okay.
 ```
 ps -wwaux | grep ssh | grep -v grep
