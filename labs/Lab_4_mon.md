@@ -73,22 +73,22 @@ mysql> select t.node_id, t.thread_name,c.OS_user,c.OS_system,c.OS_idle from cpus
 This table contains index/data memory usage per data nodes (node_id 1 and 2 are our 2 data nodes).
 ```
 mysql> SELECT * from ndbinfo.memoryusage;
-+---------+---------------------+--------+------------+----------+-------------+
-| node_id | memory_type         | used   | used_pages | total    | total_pages |
-+---------+---------------------+--------+------------+----------+-------------+
-|       1 | Data memory         | 753664 |         23 | 83886080 |        2560 |
-|       1 | Index memory        | 163840 |         20 | 19136512 |        2336 |
-|       1 | Long message buffer | 262144 |       1024 | 67108864 |      262144 |
-|       2 | Data memory         | 753664 |         23 | 83886080 |        2560 |
-|       2 | Index memory        | 163840 |         20 | 19136512 |        2336 |
-|       2 | Long message buffer | 262144 |       1024 | 67108864 |      262144 |
-+---------+---------------------+--------+------------+----------+-------------+
++---------+---------------------+---------+------------+----------+-------------+
+| node_id | memory_type         | used    | used_pages | total    | total_pages |
++---------+---------------------+---------+------------+----------+-------------+
+|       1 | Data memory         | 1933312 |         59 | 83886080 |        2560 |
+|       1 | Index memory        |  335872 |         41 | 19136512 |        2336 |
+|       1 | Long message buffer |  131072 |        512 | 67108864 |      262144 |
+|       2 | Data memory         | 1933312 |         59 | 83886080 |        2560 |
+|       2 | Index memory        |  335872 |         41 | 19136512 |        2336 |
+|       2 | Long message buffer |  393216 |       1536 | 67108864 |      262144 |
++---------+---------------------+---------+------------+----------+-------------+
 ```
 
 #### memory_per_fragment
 Memory usage by individual fragments. This table can be used for investigating memory usage for all "user defined" tables with query below. If you want to filer out some schemas or tables add *where* clause to statement and filter on `fq_name`, format of *fq_name* is <schema>/def/<table>.
 ```
-mysql> SELECT fq_name as TableName, SUM(var_elem_alloc_bytes) as VarMem, SUM(fixed_elem_alloc_bytes) as FixedMem, SUM(hash_index_alloc_bytes) as IndexMEM  from memory_per_fragment WHERE type="User table" GROUP BY fq_name;
+mysql> SELECT fq_name as TableName, SUM(var_elem_alloc_bytes) as VarMem, SUM(fixed_elem_alloc_bytes) as FixedMem, SUM(hash_index_alloc_bytes) as IndexMEM  from ndbinfo.memory_per_fragment WHERE type="User table" GROUP BY fq_name;
 +---------------------------------+--------+----------+----------+
 | TableName                       | VarMem | FixedMem | IndexMEM |
 +---------------------------------+--------+----------+----------+
@@ -96,7 +96,8 @@ mysql> SELECT fq_name as TableName, SUM(var_elem_alloc_bytes) as VarMem, SUM(fix
 | mysql/def/ndb_apply_status      |      0 |        0 |    32768 |
 | mysql/def/ndb_index_stat_head   |      0 |        0 |    32768 |
 | mysql/def/ndb_index_stat_sample |      0 |        0 |    32768 |
-| mysql/def/ndb_schema            |      0 |        0 |    32768 |
+| mysql/def/ndb_schema            | 131072 |   131072 |    65536 |
+| ted/def/test                    | 655360 |   786432 |   311296 |
 +---------------------------------+--------+----------+----------+
 ```
 
