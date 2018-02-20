@@ -8,7 +8,7 @@ Low level diagnostics on what is happening in MySQL cluster is available via a s
 
 NDBINFO tables
 ---------------
-Not all tables of the NDBINFO schema will be explained below, we will cover the most frequeltly used ones but all of them are important to understand in a production environment.
+Not all tables in the NDBINFO schema will be explained below, we will cover the most frequeltly used ones but all of them are important to understand in a production environment.
 
 Start the MySQL client (if you want to see 'help' run `mysql --help`)
 
