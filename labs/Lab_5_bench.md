@@ -35,7 +35,7 @@ mysql> select * from dict_obj_info where fq_name='ted/def/test';
 |    2 |   10 |       1 |     4 |               0 |             0 | ted/def/test |
 +------+------+---------+-------+-----------------+---------------+--------------+
 ```
-Extras (not mandatory)
+Extras (not part of 1-day workshop)
 -------------
 #### flexAsynch
 
