@@ -33,7 +33,7 @@ mysql> select * from dict_obj_info where fq_name='ted/def/test';
 |    2 |   10 |       1 |     4 |               0 |             0 | ted/def/test |
 +------+------+---------+-------+-----------------+---------------+--------------+
 ```
-There are different type of objects in the dict_obj_info table, the types can be see in table *dict_obj_types* or by joining this table like this:
+There are different type of objects in the dict_obj_info table, the types can be seen in table *dict_obj_types* or by joining this table like below.
 ```
 mysql> select dot.type_name,doi.* from dict_obj_info doi, dict_obj_types dot where doi.type=dot.type_id and fq_name='ted/def/test'; 
 +------------+------+------+---------+-------+-----------------+---------------+--------------+
