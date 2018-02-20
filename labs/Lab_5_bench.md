@@ -7,6 +7,8 @@ There are multiple benchmark tools that you can use to test your cluster, in thi
 Benchmark tools available for MySQL Cluster can found [here](https://dev.mysql.com/downloads/benchmarks.html)
 I recommend using mysqlslap for simple testing, sysbench for more advanced workloads or our flexAsync that uses native API for pushing cluster to the maximum.
 
+NDBINFO tables
+---------------
 
 NDBINFO tables
 ---------------
