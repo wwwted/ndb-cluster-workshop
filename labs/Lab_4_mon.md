@@ -163,7 +163,7 @@ mysql> select * from config_nodes;
 ```
 
 ##### logspaces
-This table provides information about NDB Cluster Redo log usage.
+This table provides information about NDB Cluster Redo log usage and space left. This information is good to monitor so you do not run out of redo log space, if this happens the cluster will reject new transations until we have freed (happens when we complete next local checkpoint) up space in the redo logs.
 ```
 mysql> select * from logspaces;
 +---------+----------+--------+----------+-----------+---------+
