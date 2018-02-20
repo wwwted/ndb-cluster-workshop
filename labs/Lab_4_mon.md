@@ -182,4 +182,90 @@ mysql> select * from logspaces;
 
 There are many more tables that are interesting in then ndbinfo tables and we will look at some more when we have some load on the system.
 
+External Tools
+---------------
+
+##### ndb_show_tables
+Will list all tables in our cluster
+```
+ted@speedy:~/ws-mcm$ ndb_show_tables
+id    type                 state    logging database     schema   name
+1     IndexTrigger         Online   -                             NDB$INDEX_11_CUSTOM
+8     UserTable            Online   Yes     mysql        def      NDB$BLOB_7_3
+10    UserTable            Online   Yes     ted          def      test
+5     UserTable            Online   Yes     mysql        def      ndb_index_stat_sample
+...
+```
+We can then specify our test table ted.test and see what internal tables in schema *sys* was created
+```
+ted@speedy:~/ws-mcm$ ndb_show_tables -dted test
+id    type                 state    logging database     schema   name
+11    OrderedIndex         Online   No      sys          def      PRIMARY
+12    OrderedIndex         Online   No      sys          def      name
+```
+As you can see we see have 2 internal tables for ordered indexes.
+
+##### ndb_desc
+Provides meta data information on the table and also partition statistics.
+
+```
+ted@speedy:~/ws-mcm$ ndb_desc -dted -p test
+-- test --
+Version: 1
+Fragment type: HashMapPartition
+K Value: 6
+Min load factor: 78
+Max load factor: 80
+Temporary table: no
+Number of attributes: 4
+Number of primary keys: 1
+Length of frm data: 328
+Max Rows: 0
+Row Checksum: 1
+Row GCI: 1
+SingleUserMode: 0
+ForceVarPart: 1
+PartitionCount: 2
+FragmentCount: 2
+PartitionBalance: FOR_RP_BY_LDM
+ExtraRowGciBits: 0
+ExtraRowAuthorBits: 0
+TableStatus: Retrieved
+Table options:
+HashMap: DEFAULT-HASHMAP-3840-2
+-- Attributes --
+id Int PRIMARY KEY DISTRIBUTION KEY AT=FIXED ST=MEMORY AUTO_INCR
+name Varchar(32;latin1_swedish_ci) NULL AT=SHORT_VAR ST=MEMORY
+address Varchar(32;latin1_swedish_ci) NULL AT=SHORT_VAR ST=MEMORY
+age Int NULL AT=FIXED ST=MEMORY
+-- Indexes -- 
+PRIMARY KEY(id) - UniqueHashIndex
+PRIMARY(id) - OrderedIndex
+name(name) - OrderedIndex
+-- Per partition info -- 
+Partition	Row count	Commit count	Frag fixed memory	Frag varsized memory	Extent_space	Free extent_space	
+0         	5031     	5031        	196608           	163840              	0            	0                 	
+1        	4869     	4869        	196608           	163840              	0            	0 
+```
+
+##### ndb_index_stat
+Update index statistics, this is neeed bulk load of data or batch jobs modifying large portitions of the data. This is simlar to running `ANALYZE TABLE` from MySQL Client but no locking problems will be triggered on MySQL API node.
+```
+ndb_index_stat -d ted test --update
+```
+We can also look at index statistics
+```
+ted@speedy:~/ws-mcm$ ndb_index_stat -dted test 
+table:test index:PRIMARY fragCount:2
+sampleVersion:1 loadTime:1519130439 sampleCount:4868 keyBytes:19472
+query cache: valid:1 sampleCount:4868 totalBytes:68152
+times in ms: save: 23.329 sort: 8.527 sort per sample: 0.001
+table:test index:name fragCount:2
+sampleVersion:1 loadTime:1519130439 sampleCount:5030 keyBytes:44809
+query cache: valid:1 sampleCount:5030 totalBytes:95109
+times in ms: save: 7.478 sort: 6.207 sort per sample: 0.001
+```
+There are more external tools available, all tool are described [here](https://dev.mysql.com/doc/mysql-cluster-excerpt/5.7/en/mysql-cluster-programs.html)
+
+
 **[Back to Agenda](./../README.md)**
