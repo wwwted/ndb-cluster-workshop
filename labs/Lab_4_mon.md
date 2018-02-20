@@ -141,6 +141,7 @@ mysql> SELECT fq_name as TableName, SUM(var_elem_alloc_bytes) as VarMem, SUM(fix
 | ted/def/test                    | 655360 |   786432 |   311296 |
 +---------------------------------+--------+----------+----------+
 ```
+This will show total memory used by all fragments (primary and backup) in cluster, if you want to calculate average row size for a table you should devide memory result above with your replication factor (default 2).
 
 #### config_nodes
 MySQL Cluster nodes currently configured in the config.ini. This table does not say anything about the state of the nodes.
