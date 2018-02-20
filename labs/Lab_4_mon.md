@@ -17,8 +17,12 @@ mysql -uroot -proot -P3311 -h127.0.0.1 ndbinfo
   or provide socket file like:
 mysql -uroot -proot -S/tmp/mysql.mycluster.50.sock  ndbinfo
 ```
+Before we look at ndbinfo tables lets add some random data, copy 
 
-#### Node
+```
+```
+
+#### node
 Current status of our datanodes. Beside current status this table also contains, uptime since last re-start, start phase during restart and configuration version being used. This information is very good to have during rolling restarts.
 ```
 mysql> select * from nodes;
