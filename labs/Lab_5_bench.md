@@ -1,10 +1,12 @@
 **[Back to Agenda](./../README.md)**
 
-# Lab 5 - Benchmarking a MySQL Cluster
+# Lab 5 - Running some load on MySQL Cluster
 
-Monitoring NBD Cluster can be done by using [MySQL Enterprise Monitor](https://www.mysql.com/products/enterprise/monitor.html). MySQL Enterprise Monitor is a graphical monitoring system that can be used to get a high level view of your cluster status, it can also fire off alarms if something is not working correctly.
+There are multiple benchmark tools that you can use to test your cluster, in this workshop we will use the native myqlslap that is included with the distribution.
 
-Low level diagnostics on what is happening in MySQL cluster is available via a set of tables in the `ndbinfo` schema. All tables in `ndbinfo` schema are described in detail in our [manual](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-ndbinfo.html). 
+Benchmark tools available for MySQL Cluster can found [here](https://dev.mysql.com/downloads/benchmarks.html)
+I recommend using mysqlslap for simple testing, sysbench for more advanced workloads or our flexAsync that uses native API for pushing cluster to the maximum.
+
 
 NDBINFO tables
 ---------------
@@ -32,6 +34,38 @@ mysql> select * from dict_obj_info where fq_name='ted/def/test';
 +------+------+---------+-------+-----------------+---------------+--------------+
 |    2 |   10 |       1 |     4 |               0 |             0 | ted/def/test |
 +------+------+---------+-------+-----------------+---------------+--------------+
+```
+Extras (not mandatory)
+-------------
+#### flexAsynch
+
+To build flexAsynch you need to download our source code.
+```
+ wget http://dev.mysql.com/get/Downloads/MySQL-Cluster-7.5/mysql-cluster-gpl-7.5.9.tar.gz
+ tar xzf mysql-cluster-gpl-7.5.9.tar.gz
+ cd mysql-cluster-gpl-7.5.9
+
+```
+Build the flexAsynch binaries.
+(you need to have cmake,g++, gcc, cmake, libncurses5-dev build binaries)
+(replace my paths with your own before running the commands)
+```
+mkdir 759Target
+cmake . -DCMAKE_INSTALL_PREFIX=/path/to/759target/ -DWITH_NDB_TEST=ON
+             -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/path/to/build/mysql-cluster-gpl-7.5.9/boost/
+make
+make install
+```
+Running flexAsynch
+(replace path and HOST:PORT with hostname and port nuumber (1186 default) to your management node before running commands)
+```
+export LD_LIBRARY_PATH=/path/to/759Target/lib
+export NDB_CONNECTSTRING="host=HOST:PORT"
+./flexAsynch -temp -t 1 -p 80 -l 2 -o 100 -c 100 -n -a 2
+```
+If you get an error that you can not allocate a node id this means you have no free slots to connect to the cluster. Add another slot in you configuration by running command below (replace <ip-address> and <clustername>).
+```
+mcm: add process --processhosts=ndbapi@<ip-adress> <cluster-name>;
 ```
 
 **[Back to Agenda](./../README.md)**
