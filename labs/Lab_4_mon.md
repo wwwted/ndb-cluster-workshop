@@ -6,7 +6,8 @@ Monitoring NBD Cluster can be done by using [MySQL Enterprise Monitor](https://w
 
 Low level diagnostics on what is happening in MySQL cluster is available via a set of tables in the `ndbinfo` schema. All tables in `ndbinfo` schema are described in detail in our [manual](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-ndbinfo.html). 
 
-#### NDBINFO tables
+NDBINFO tables
+---------------
 Not all tables of the NDBINFO schema will be explained below, we will cover the most frequeltly used ones but all of them are important to understand in a production environment.
 
 Start the MySQL client (if you want to see 'help' run `mysql --help`)
@@ -17,7 +18,7 @@ mysql -uroot -proot -P3311 -h127.0.0.1 ndbinfo
 mysql -uroot -proot -S/tmp/mysql.mycluster.50.sock  ndbinfo
 ```
 
-###### *node*  
+#### Node
 Current status of our datanodes. Beside current status this table also contains, uptime since last re-start, start phase during restart and configuration version being used. This information is very good to have during rolling restarts.
 ```
 mysql> select * from nodes;
@@ -28,7 +29,7 @@ mysql> select * from nodes;
 |       2 |   1205 | STARTED |           0 |                 0 |
 +---------+--------+---------+-------------+-------------------+
 ```
-*threads*  
+#### threads
 The threads table provides information about threads running in the NDB kernel.
 ```
 mysql> select * from threads;
@@ -64,7 +65,7 @@ mysql> select t.node_id, t.thread_name,c.OS_user,c.OS_system,c.OS_idle from cpus
 
 ```
 
-*memoryusage*  
+#### memoryusage
 This table contains index/data memory usage per data nodes (node_id 1 and 2 are our 2 data nodes).
 ```
 mysql> SELECT * from ndbinfo.memoryusage;
@@ -80,7 +81,7 @@ mysql> SELECT * from ndbinfo.memoryusage;
 +---------+---------------------+--------+------------+----------+-------------+
 ```
 
-*memory_per_fragment*  
+#### memory_per_fragment
 Memory usage by individual fragments. This table can be used for investigating memory usage for all "user defined" tables with query below. If you want to filer out some schemas or tables add *where* clause to statement and filter on `fq_name`, format of *fq_name* is <schema>/def/<table>.
 ```
 mysql> SELECT fq_name as TableName, SUM(var_elem_alloc_bytes) as VarMem, SUM(fixed_elem_alloc_bytes) as FixedMem, SUM(hash_index_alloc_bytes) as IndexMEM  from memory_per_fragment WHERE type="User table" GROUP BY fq_name;
@@ -95,7 +96,7 @@ mysql> SELECT fq_name as TableName, SUM(var_elem_alloc_bytes) as VarMem, SUM(fix
 +---------------------------------+--------+----------+----------+
 ```
 
-*config_nodes*  
+#### config_nodes
 MySQL Cluster nodes currently configured in the config.ini. This table does not say anything about the state of the nodes.
 
 ```
