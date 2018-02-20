@@ -22,6 +22,47 @@ Before we start running queries aganst ndbinfo tables lets add some random data,
 mysql -uroot -proot -P3311 -h127.0.0.1 < create_ndb_testdata.sql
 ```
 
+#### dict_obj_info
+The dict_obj_info table provides information about NDB data dictionary (DICT) objects such as tables and indexes.
+Lets find some information about our test table created above.
+```
+mysql> select * from dict_obj_info where fq_name='ted/def/test';                   
++------+------+---------+-------+-----------------+---------------+--------------+
+| type | id   | version | state | parent_obj_type | parent_obj_id | fq_name      |
++------+------+---------+-------+-----------------+---------------+--------------+
+|    2 |   10 |       1 |     4 |               0 |             0 | ted/def/test |
++------+------+---------+-------+-----------------+---------------+--------------+
+```
+There are different type of objects in the dict_obj_info table, the types can be see in table *dict_obj_types* or by joining this table like this:
+```
+mysql> select dot.type_name,doi.* from dict_obj_info doi, dict_obj_types dot where doi.type=dot.type_id and fq_name='ted/def/test'; 
++------------+------+------+---------+-------+-----------------+---------------+--------------+
+| type_name  | type | id   | version | state | parent_obj_type | parent_obj_id | fq_name      |
++------------+------+------+---------+-------+-----------------+---------------+--------------+
+| User table |    2 |   10 |       1 |     4 |               0 |             0 | ted/def/test |
++------------+------+------+---------+-------+-----------------+---------------+--------------+
+```
+If we look at all rows in table dict_obj_info we can see that when we created our test table above 5 objects where created, lets look at what rows have our table id as *parent_obj_id*.
+```
+mysql> select dot.type_name, do2.id,do2.parent_obj_id, do2.fq_name from dict_obj_info do1, dict_obj_info do2, dict_obj_types dot where do1.id=do2.parent_obj_id and dot.type_id=do2.type and do1.id=10;
++---------------+------+---------------+--------------------+
+| type_name     | id   | parent_obj_id | fq_name            |
++---------------+------+---------------+--------------------+
+| Ordered index |   11 |            10 | sys/def/10/PRIMARY |
+| Ordered index |   12 |            10 | sys/def/10/name    |
++---------------+------+---------------+--------------------+
+```
+As you can see there are 2 orderered indexes also created together with our table, if you dive even further you will see two index triggers that where created and are connected to our Ordered indexes above.
+```
+mysql> select dot.type_name, do2.id,do2.parent_obj_id, do2.fq_name from dict_obj_info do1, dict_obj_info do2, dict_obj_types dot where do1.id=do2.parent_obj_id and dot.type_id=do2.type and (do1.id=11 or do1.id=12);
++---------------+------+---------------+---------------------+
+| type_name     | id   | parent_obj_id | fq_name             |
++---------------+------+---------------+---------------------+
+| Index trigger |    1 |            11 | NDB$INDEX_11_CUSTOM |
+| Index trigger |    2 |            12 | NDB$INDEX_12_CUSTOM |
++---------------+------+---------------+---------------------+
+```
+
 #### node
 Current status of our datanodes. Beside current status this table also contains, uptime since last re-start, start phase during restart and configuration version being used. This information is very good to have during rolling restarts.
 ```
