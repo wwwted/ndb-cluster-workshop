@@ -24,7 +24,7 @@ mysql -uroot -proot -P3311 -h127.0.0.1 < create_ndb_testdata.sql
 
 #### dict_obj_info
 The dict_obj_info table provides information about NDB data dictionary (DICT) objects such as tables and indexes.
-Lets find some information about our test table created above.
+Lets find some information about our test table created above, if you want to filer out some schemas or tables add where clause to statement and filter on fq_name, format of fq_name is \<schema\>/def/\<table\> as seen for our test table below.
 ```
 mysql> select * from dict_obj_info where fq_name='ted/def/test';                   
 +------+------+---------+-------+-----------------+---------------+--------------+
