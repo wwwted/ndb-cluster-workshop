@@ -162,4 +162,24 @@ mysql> select * from config_nodes;
 +---------+-----------+---------------+
 ```
 
+##### logspaces
+This table provides information about NDB Cluster Redo log usage.
+```
+mysql> select * from logspaces;
++---------+----------+--------+----------+-----------+---------+
+| node_id | log_type | log_id | log_part | total     | used    |
++---------+----------+--------+----------+-----------+---------+
+|       1 | REDO     |      0 |        0 | 268435456 | 1048576 |
+|       1 | REDO     |      0 |        1 | 268435456 |       0 |
+|       1 | REDO     |      0 |        2 | 268435456 |       0 |
+|       1 | REDO     |      0 |        3 | 268435456 |       0 |
+|       2 | REDO     |      0 |        0 | 268435456 | 1048576 |
+|       2 | REDO     |      0 |        1 | 268435456 |       0 |
+|       2 | REDO     |      0 |        2 | 268435456 |       0 |
+|       2 | REDO     |      0 |        3 | 268435456 |       0 |
++---------+----------+--------+----------+-----------+---------+
+```
+
+There are many more tables that are interesting in then ndbinfo tables and we will look at some more when we have some load on the system.
+
 **[Back to Agenda](./../README.md)**
