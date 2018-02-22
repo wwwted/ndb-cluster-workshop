@@ -10,16 +10,6 @@ To fully benefit (not mandatory) from hands-on work in this workshop its importa
 
 If you want to attend the hands-on work you need to download MCM (Mysql Cluster Manager) as described [here](/labs/prework.md).
 
-If you want to know more about MySQL Cluster I recommend these 2 books:
-- [Pro MySQL NDB Cluster](https://www.apress.com/br/book/9781484229811)
-- [MySQL Cluster 7.5 inside and out](https://www.adlibris.com/se/bok/mysql-cluster-75-inside-and-out-mysql-cluster-75-inside-and-out-9789176997574)
-
-Blogs and our manuals:
-- [MySQL Cluser Carrier Grade Edition](https://www.mysql.com/products/cluster/) 
-- [Reference manual for NDB 7.5](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster.html)
-- [Mikael Ronstroms blog, the creator of NDB](http://mikaelronstrom.blogspot.co.uk/)
-- [MySQL HA Blog](https://mysqlhighavailability.com/category/mysql-cluster/)
-
 
 ----------
 
@@ -51,4 +41,14 @@ Agenda for today:
   * Lecture
   * Not part of 1-day workshop [Lab 5 - Replication](./labs/Lab_4_replication.md)
  
+ --------
  
+ If you want to know more about MySQL Cluster I recommend these 2 books:
+- [Pro MySQL NDB Cluster](https://www.apress.com/br/book/9781484229811)
+- [MySQL Cluster 7.5 inside and out](https://www.adlibris.com/se/bok/mysql-cluster-75-inside-and-out-mysql-cluster-75-inside-and-out-9789176997574)
+
+Blogs and our manuals:
+- [MySQL Cluser Carrier Grade Edition](https://www.mysql.com/products/cluster/) 
+- [Reference manual for NDB 7.5](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster.html)
+- [Mikael Ronstroms blog, the creator of NDB](http://mikaelronstrom.blogspot.co.uk/)
+- [MySQL HA Blog](https://mysqlhighavailability.com/category/mysql-cluster/)
