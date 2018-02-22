@@ -43,12 +43,71 @@ mysql> select node_id, memory_type, (used/total)*100 as "Used Memory %" from ndb
 |       2 | Long message buffer |        0.5859 |
 +---------+---------------------+---------------+
 ```
-As you see, just before mysqlslap fails we are running out of data memory on both data nodes.
+As you can see, just before mysqlslap fails we are running out of datamemory on both data nodes. Default amount of memory allocated for datamemory is 80M.
+```
+mcm> get -d datamemory:ndbmtd mycluster;
++------------+----------+----------+---------+----------+---------+---------+---------+
+| Name       | Value    | Process1 | NodeId1 | Process2 | NodeId2 | Level   | Comment |
++------------+----------+----------+---------+----------+---------+---------+---------+
+| DataMemory | 83886080 | ndbmtd   | 1       |          |         | Default |         |
+| DataMemory | 83886080 | ndbmtd   | 2       |          |         | Default |         |
++------------+----------+----------+---------+----------+---------+---------+---------+
+```
 
-Lets add some more memory so we can run our benchmark.
+Lets add some more datamemory so we can run our benchmark. 
 ```
-mcm> set
+mcm> set datamemory:ndbmtd=160M mycluster;
 ```
+
+Whilst you are waiting for configuration change to be completed you can look at rolling restart progress being completed by mcm by running:
+```
+watch "./mcm/bin/mcm -e'show status -r mycluster'"
+```
+mcm will first update configuration and restart managent nodes, next restart datanodes and lastly the MySQL API nodes.
+
+Lets try to re-run our bechmark once more.
+```
+bash$ mysqlslap -h127.0.0.1 -P3310 -uroot -proot --auto-generate-sql --auto-generate-sql-guid-primary --auto-generate-sql-secondary-indexes=2 --auto-generate-sql-load-type=read --auto-generate-sql-write-number=200000 --auto-generate-sql-execute-number=100 --concurrency=6 --engine=ndbcluster 
+mysqlslap: [Warning] Using a password on the command line interface can be insecure.
+Benchmark
+	Running for engine ndbcluster
+	Average number of seconds to run all queries: 118.321 seconds
+	Minimum number of seconds to run all queries: 118.321 seconds
+	Maximum number of seconds to run all queries: 118.321 seconds
+	Number of clients running queries: 6
+	Average number of queries per client: 100
+``` 
+During benchmark, look at memoryusage until this stop growing
+```
+mysql> select node_id, memory_type, (used/total)*100 as "Used Memory %" from ndbinfo.memoryusage;
+```
+Also look at what cluster is doing
+```
+select * from cluster_operations; SELECT * from cluster_transactions;
+```
+Mostly INSERT operations when datamemory is growing, we are here populating our test table, after datamemory stops growing you should see that we are doing more read (SCAN) operations.
+
+How much CPU are our processes consuming during the benchmark?
+```
+mysql> select t.node_id, t.thread_name,c.OS_user,c.OS_system,c.OS_idle from cpustat c join threads t on t.node_id=c.node_id AND t.thr_no=c.thr_no order by OS_user desc;
++---------+-------------+---------+-----------+---------+
+| node_id | thread_name | OS_user | OS_system | OS_idle |
++---------+-------------+---------+-----------+---------+
+|       1 | ldm         |      74 |         5 |      21 |
+|       2 | ldm         |      74 |         4 |      22 |
+|       2 | main        |       4 |         6 |      90 |
+|       1 | main        |       3 |         7 |      90 |
+|       2 | recv        |       1 |         5 |      94 |
+|       1 | rep         |       0 |         0 |     100 |
+|       1 | recv        |       0 |         6 |      94 |
+|       2 | rep         |       0 |         0 |     100 |
++---------+-------------+---------+-----------+---------+
+```
+During forst part doing mostly inserts we are mostly using REDO and LCP capacity (I/O)
+```
+mysql> select * from disk_write_speed_aggregate_node\G
+```
+After this when doing only SCAN operations we move to being CPU bound.
 
 Extras (not part of 1-day workshop)
 -------------
