@@ -7,36 +7,33 @@ There are multiple benchmark tools that you can use to test your cluster, in thi
 Benchmark tools available for MySQL Cluster can found [here](https://dev.mysql.com/downloads/benchmarks.html)
 I recommend using mysqlslap for simple testing, sysbench for more advanced workloads or our flexAsync that uses native API for pushing cluster to the maximum.
 
-NDBINFO tables
+mysqlslap
 ---------------
 
-NDBINFO tables
----------------
-Not all tables of the NDBINFO schema will be explained below, we will cover the most frequeltly used ones but all of them are important to understand in a production environment.
+Mysqlslap is a simple benchmark program that works for normal MySQL and for MySQL NDB Cluster. It's a small command line tool that is part of the standard distribution and always available.
 
-Start the MySQL client (if you want to see 'help' run `mysql --help`)
+Mysqlslap have same standard options for connecting as the MySQL Client, we will run command below.
+```
+bash$ mysqlslap -h127.0.0.1 -P3310 -uroot -proot --auto-generate-sql --auto-generate-sql-guid-primary --auto-generate-sql-secondary-indexes=2 --auto-generate-sql-load-type=read --auto-generate-sql-write-number=200000 --auto-generate-sql-execute-number=100 --concurrency=6 --engine=ndbcluster
+```
+You can read about the option in the output from `mysqlslap --help` or in our [manual](https://dev.mysql.com/doc/refman/5.7/en/mysqlslap.html).
+
+In short, we will connect to one of the MySQL API nodes running on localhost, port 3310 as "user/pwd" "root/root", we will then have mysqlslap generating some SQL statements, we specify we want to simulate 6 sessions accessing MySQL API, our test table to have 1 primary key and 2 secondary indexes, furthermore we state we want to populate table with 200.000 inserts from start, and this we will start test by running 6 parallell 100 read request (full table scan) to our cluster table.
+
+If you want to see what statements are executed during test add option `--only-print`as last option to command above.
+
+Low lets execute mysqlslap statement above!
+```
+bash$ mysqlslap -h127.0.0.1 -P3310 -uroot -proot --auto-generate-sql --auto-generate-sql-guid-primary --auto-generate-sql-secondary-indexes=2 --auto-generate-sql-load-type=read --auto-generate-sql-write-number=200000 --auto-generate-sql-execute-number=100 --concurrency=6 --engine=ndbcluster 
+mysqlslap: [Warning] Using a password on the command line interface can be insecure.
+mysqlslap: Cannot run query INSERT INTO t1 VALUES (uuid(),uuid(),uuid(),964445884,'DPh7kD1E6f4MMQk1ioopsoIIcoD83DD8Wu7689K6oHTAjD3Hts6lYGv8x9G0EL0k87q8G2ExJjz2o3KhnIJBbEJYFROTpO5pNvxgyBT9nSCbNO9AiKL9QYhi0x3hL9') ERROR : The table 't1' is full
+```
+Looks like our table is full?
+Lets re-run the benchmark and look at information in ndbinfo.memorysage during initial load of data.
+```
 
 ```
-mysql -uroot -proot -P3311 -h127.0.0.1 ndbinfo
-  or provide socket file like:
-mysql -uroot -proot -S/tmp/mysql.mycluster.50.sock  ndbinfo
-```
-Before we start running queries aganst ndbinfo tables lets add some random data, copy commands [here](https://gist.github.com/wwwted/10656c765dac2c988ba567d5c710c7e6) put them in a file named *create_ndb_testdata.sql* or download zip-file and then run command below.
-```
-mysql -uroot -proot -P3311 -h127.0.0.1 < create_ndb_testdata.sql
-```
 
-#### dict_obj_info
-The dict_obj_info table provides information about NDB data dictionary (DICT) objects such as tables and indexes.
-Lets find some information about our test table created above, if you want to filer out some schemas or tables add where clause to statement and filter on fq_name, format of fq_name is \<schema\>/def/\<table\> as seen for our test table below.
-```
-mysql> select * from dict_obj_info where fq_name='ted/def/test';                   
-+------+------+---------+-------+-----------------+---------------+--------------+
-| type | id   | version | state | parent_obj_type | parent_obj_id | fq_name      |
-+------+------+---------+-------+-----------------+---------------+--------------+
-|    2 |   10 |       1 |     4 |               0 |             0 | ted/def/test |
-+------+------+---------+-------+-----------------+---------------+--------------+
-```
 Extras (not part of 1-day workshop)
 -------------
 #### flexAsynch
