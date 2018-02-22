@@ -24,20 +24,20 @@ Agenda for today:
   * [Lab 1 - Install MySQL Cluster Manager](./labs/Lab_1_install.md)
   * [Lab 2 - Create Cluster](./labs/Lab_2_create.md)
 
-* Administration: backup/upgrade/logs/conf/sizing
+* Administration: Backup/upgrade/logs/conf/sizing
   * Lecture
   * [Lab 3 - Backup](./labs/Lab_3_backup.md)
 
-* Monitoring: surveillance and problem solving
+* Monitoring: Surveillance and problem solving
   * Lecture
   * [Lab 4 - Monitoring](./labs/Lab_4_mon.md)
   * [Lab 5 - Benchmark](./labs/Lab_5_bench.md)
   * [Lab 6 - Add more capacity](./labs/Lab_6_add.md)
 
-* Best practices: architectures and case studies
+* Best practices: Architectures and case studies
   * Lecture
 
-* Geo Replication: asynchronous replication and conflict resolution
+* Geo Replication: Asynchronous replication and conflict resolution
   * Lecture
   * Not part of 1-day workshop [Lab 5 - Replication](./labs/Lab_4_replication.md)
  
