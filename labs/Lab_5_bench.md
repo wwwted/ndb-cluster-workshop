@@ -41,7 +41,8 @@ Extras (not part of 1-day workshop)
 -------------
 #### flexAsynch
 
-To build flexAsynch you need to download our source code.
+To build flexAsynch you need to download our source code either from [gitub](https://github.com/mysql/mysql-server) or via link below.  
+You can view the code for flexAsynch on gitub [here](https://github.com/mysql/mysql-server/blob/5.7/storage/ndb/test/ndbapi/flexAsynch.cpp).
 ```
  wget http://dev.mysql.com/get/Downloads/MySQL-Cluster-7.5/mysql-cluster-gpl-7.5.9.tar.gz
  tar xzf mysql-cluster-gpl-7.5.9.tar.gz
