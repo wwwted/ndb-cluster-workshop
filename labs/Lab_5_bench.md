@@ -77,11 +77,11 @@ Benchmark
 	Number of clients running queries: 6
 	Average number of queries per client: 100
 ``` 
-During benchmark, look at memoryusage until this stop growing
+During benchmark, look at memoryusage until this stop growing:
 ```
 mysql> select node_id, memory_type, (used/total)*100 as "Used Memory %" from ndbinfo.memoryusage;
 ```
-Also look at what cluster is doing
+Also look at what cluster is doing:
 ```
 select * from cluster_operations; SELECT * from cluster_transactions;
 ```
@@ -103,11 +103,26 @@ mysql> select t.node_id, t.thread_name,c.OS_user,c.OS_system,c.OS_idle from cpus
 |       2 | rep         |       0 |         0 |     100 |
 +---------+-------------+---------+-----------+---------+
 ```
-During forst part doing mostly inserts we are mostly using REDO and LCP capacity (I/O)
+During first part doing mostly inserts we are mostly using REDO and LCP capacity (I/O)
 ```
 mysql> select * from disk_write_speed_aggregate_node\G
 ```
 After this when doing only SCAN operations we move to being CPU bound.
+
+Another interesting table is ndbinfo.counters, this table contains a set of counters that describes some specific action inside NDB, the counters are incremented when the action is triggered. These values are most interesting by taking two snapshopts of the statment below and them comparing them to see what has happen during the time period between the two snapshots.
+
+```
+mysql> select * from counters;
+```
+If you have perl installed on your server, I have created a small [perlskript](../scripts/ndbstat.pl) that takes two snapshots and prints the counters that have changed during the interal between the two snapshots.
+```
+bash$ perl ndbstat.pl --host=127.0.0.1 --port=3310 --user=root --password=root
+```
+Another option is by using a SQL file with two select statements and a sleep in between like [this](../scripts/counter-stats.sql) and run it via `watch`:
+```
+bash$ watch "mysql -uroot -proot -h127.0.0.1 -P3310 < counter-stats.sql"
+```
+Re-run benchmark and look at counters table.
 
 Extras (not part of 1-day workshop)
 -------------
