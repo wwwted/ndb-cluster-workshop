@@ -83,7 +83,7 @@ mysql> select node_id, memory_type, (used/total)*100 as "Used Memory %" from ndb
 ```
 Also look at what cluster is doing:
 ```
-select * from cluster_operations; SELECT * from cluster_transactions;
+mysql> select * from cluster_operations; SELECT * from cluster_transactions;
 ```
 Mostly INSERT operations when datamemory is growing, we are here populating our test table, after datamemory stops growing you should see that we are doing more read (SCAN) operations.
 
