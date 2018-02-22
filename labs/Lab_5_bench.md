@@ -28,10 +28,26 @@ bash$ mysqlslap -h127.0.0.1 -P3310 -uroot -proot --auto-generate-sql --auto-gene
 mysqlslap: [Warning] Using a password on the command line interface can be insecure.
 mysqlslap: Cannot run query INSERT INTO t1 VALUES (uuid(),uuid(),uuid(),964445884,'DPh7kD1E6f4MMQk1ioopsoIIcoD83DD8Wu7689K6oHTAjD3Hts6lYGv8x9G0EL0k87q8G2ExJjz2o3KhnIJBbEJYFROTpO5pNvxgyBT9nSCbNO9AiKL9QYhi0x3hL9') ERROR : The table 't1' is full
 ```
-Looks like our table is full?
+Hmmm, looks like our table went full?
 Lets re-run the benchmark and look at information in ndbinfo.memorysage during initial load of data.
 ```
+mysql> select node_id, memory_type, (used/total)*100 as "Used Memory %" from ndbinfo.memoryusage;
++---------+---------------------+---------------+
+| node_id | memory_type         | Used Memory % |
++---------+---------------------+---------------+
+|       1 | Data memory         |       95.0000 |
+|       1 | Index memory        |       33.1336 |
+|       1 | Long message buffer |        0.5859 |
+|       2 | Data memory         |       95.0000 |
+|       2 | Index memory        |       33.1336 |
+|       2 | Long message buffer |        0.5859 |
++---------+---------------------+---------------+
+```
+As you see, just before mysqlslap fails we are running out of data memory on both data nodes.
 
+Lets add some more memory so we can run our benchmark.
+```
+mcm> set
 ```
 
 Extras (not part of 1-day workshop)
