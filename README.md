@@ -39,7 +39,7 @@ Agenda for today:
 
 * Geo Replication: Asynchronous replication and conflict resolution
   * Lecture
-  * Not part of 1-day workshop [Lab 5 - Replication](./labs/Lab_4_replication.md)
+  * Not part of 1-day workshop [Lab 7 - Replication](./labs/Lab_7_replication.md)
  
  --------
  
