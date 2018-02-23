@@ -109,6 +109,7 @@ mysql> select t.node_id, t.thread_name,c.OS_user,c.OS_system,c.OS_idle from cpus
 |       2 | rep         |       0 |         0 |     100 |
 +---------+-------------+---------+-----------+---------+
 ```
+Now it should complete successfully, you can re-run the bechmark multiple time and look at data in ndbinfo tables described below.  
 During first part doing mostly inserts we are mostly using REDO and LCP capacity (I/O)
 ```
 mysql> select * from disk_write_speed_aggregate_node\G
