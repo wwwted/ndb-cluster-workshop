@@ -9,7 +9,7 @@ Feel free to bookmark (star) this page for future testing.
 To fully benefit (not mandatory) from hands-on work in this workshop its important that you have some prior experience with databases and are comfortable working in a Linux/Unix environment.
 
 If you want to attend the hands-on work you need to download MCM (Mysql Cluster Manager) as described [here](/labs/prework.md).  
-MySQL Cluster Manager [cheat sheet](https://gist.github.com/wwwted/fb151c3a14c3e9ba65fe0f09ed65a1c4), all commands are avaible in our online [reference manual](https://dev.mysql.com/doc/mysql-cluster-manager/1.4/en/mcm-client-commands.html).
+MySQL Cluster Manager [cheat sheet](https://gist.github.com/wwwted/fb151c3a14c3e9ba65fe0f09ed65a1c4), complete list of commands is available in our online [reference manual](https://dev.mysql.com/doc/mysql-cluster-manager/1.4/en/mcm-client-commands.html).
 
 ----------
 
