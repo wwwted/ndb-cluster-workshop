@@ -36,6 +36,7 @@ mysqlslap: Cannot run query INSERT INTO t1 VALUES (uuid(),uuid(),uuid(),96444588
 ```
 Hmmm, looks like our table went full?
 Lets re-run the benchmark and look at information in ndbinfo.memorysage during initial load of data.
+(Run command below once per second or use `watch` command automatically handle this, se example below) 
 ```
 mysql> select node_id, memory_type, (used/total)*100 as "Used Memory %" from ndbinfo.memoryusage;
 +---------+---------------------+---------------+
@@ -48,6 +49,10 @@ mysql> select node_id, memory_type, (used/total)*100 as "Used Memory %" from ndb
 |       2 | Index memory        |       33.1336 |
 |       2 | Long message buffer |        0.5859 |
 +---------+---------------------+---------------+
+```
+Automate monoring of memory in separat terminal using `watch` command.
+```
+watch "mysql -uroot -proot -h127.0.0.1 -P3310 -e'select node_id, memory_type, (used/total)*100 as Used_Memory_pct from ndbinfo.memoryusage;'"
 ```
 As you can see, just before mysqlslap fails we are running out of datamemory on both data nodes. Default amount of memory allocated for datamemory is 80M.
 ```
@@ -83,7 +88,8 @@ Benchmark
 	Number of clients running queries: 6
 	Average number of queries per client: 100
 ``` 
-During benchmark, look at memoryusage until this stop growing:
+Now it should complete successfully, you can re-run the bechmark multiple time and look at data in ndbinfo tables described below. 
+During benchmark, look at memoryusage until this stop growing.
 ```
 mysql> select node_id, memory_type, (used/total)*100 as "Used Memory %" from ndbinfo.memoryusage;
 ```
@@ -108,8 +114,7 @@ mysql> select t.node_id, t.thread_name,c.OS_user,c.OS_system,c.OS_idle from cpus
 |       1 | recv        |       0 |         6 |      94 |
 |       2 | rep         |       0 |         0 |     100 |
 +---------+-------------+---------+-----------+---------+
-```
-Now it should complete successfully, you can re-run the bechmark multiple time and look at data in ndbinfo tables described below.  
+``` 
 During first part doing mostly inserts we are mostly using REDO and LCP capacity (I/O)
 ```
 mysql> select * from disk_write_speed_aggregate_node\G
