@@ -4,7 +4,7 @@
 
 With MySQL Cluster you have two options to achieve geographic redundancy, either you create 2 MySQL Cluster sites in different locations and use MySQL asynchronous replication to keep them in sync or you 'streach' one installation of one cluster over 2 locations separated by some distance.
 
-##### 2 sites and async replication
+##### Two Cluster Sites and async replication
 ``` 
           DC1                                           DC2
         -------                                       -------
