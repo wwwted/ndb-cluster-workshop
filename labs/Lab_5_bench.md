@@ -18,9 +18,15 @@ bash$ mysqlslap -h127.0.0.1 -P3310 -uroot -proot --auto-generate-sql --auto-gene
 ```
 You can read about the option in the output from `mysqlslap --help` or in our [manual](https://dev.mysql.com/doc/refman/5.7/en/mysqlslap.html).
 
-In short, we will connect to one of the MySQL API nodes running on localhost, port 3310 as "user/pwd" "root/root", we will then have mysqlslap generating some SQL statements, we specify we want to simulate 6 sessions accessing MySQL API, our test table to have 1 primary key and 2 secondary indexes, furthermore we state we want to populate table with 200.000 inserts from start, and this we will start test by running 6 parallell 100 read request (full table scan) to our cluster table.
+In short, mysqlslap command above will:
+  - connect to one of our MySQL API nodes running on localhost using port 3310 as user "root/root",
+  - then mysqlslap will generating some SQL statements,
+  - we specify we want to simulate 6 sessions accessing MySQL API,
+  - our test table to have 1 primary key and 2 secondary indexes,
+  - furthermore we state we want to populate table with 200.000 inserts from start,
+  - after data is populated the test starts by running 6 parallell 100 read request (full table scan) to our cluster table.
 
-If you want to see what statements are executed during test add option `--only-print`as last option to command above.
+If you want to see what specific statements that are executed during test use option `--only-print`as last option in command above.
 
 Low lets execute mysqlslap statement above!
 ```
