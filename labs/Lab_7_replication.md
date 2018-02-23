@@ -33,7 +33,7 @@ With MySQL Cluster you have two options to achieve geographic redundancy, either
 
 TBC ...
 
-Creating two 2 cluster with replication
+Creating two Cluster with replication
 ---------------
 
 #### Active/Passive setup
