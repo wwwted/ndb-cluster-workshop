@@ -50,7 +50,7 @@ mysql> select node_id, memory_type, (used/total)*100 as "Used Memory %" from ndb
 |       2 | Long message buffer |        0.5859 |
 +---------+---------------------+---------------+
 ```
-Automate monoring of memory in separat terminal using `watch` command.
+Automate monitoring of memory usage in separat terminal using `watch` command.
 ```
 watch "mysql -uroot -proot -h127.0.0.1 -P3310 -e'select node_id, memory_type, (used/total)*100 as Used_Memory_pct from ndbinfo.memoryusage;'"
 ```
