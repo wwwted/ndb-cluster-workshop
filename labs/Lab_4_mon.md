@@ -141,7 +141,9 @@ mysql> SELECT fq_name as TableName, SUM(var_elem_alloc_bytes) as VarMem, SUM(fix
 | ted/def/test                    | 655360 |   786432 |   311296 |
 +---------------------------------+--------+----------+----------+
 ```
-This will show total memory used by all fragments (primary and backup) in cluster, if you want to calculate average row size for a table you should devide memory result above with your replication factor (default 2).
+This will show total memory used by all fragments (primary and backup) in cluster, if we want to calculate average row size for a row in our table we should devide memory result above with our replication factor (default 2) and total amount of rows. If we want to size hardware (RAM) for our data nodes we need to also include backup fragments.  
+
+For example) if we have 8 data nodes (on dedicated HW), each data node will have it's own primary partition of data and one backup partition (we will get 4 node groups (by default)), the amount of data memory needed per data node will be result of query above divided by 4 (primary and backup fragement must be counted). 
 
 #### config_nodes
 MySQL Cluster nodes currently configured in the config.ini. This table does not say anything about the state of the nodes.
