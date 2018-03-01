@@ -1,5 +1,5 @@
-DATA_LENGTH is all memory needed by table without any optional indexes. Note, that primary key hash index is included since it is mandatory. Blob tables are also included.
 
+DATA_LENGTH is all memory needed by table without any optional indexes. Note, that primary key hash index is included since it is mandatory. Blob tables are also included.
 INDEX_LENGTH is memory used by indexes, both ordered index and secondary unique indexes.  Memory for primary ordered index if it exists is included here.
 
 
