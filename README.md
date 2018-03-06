@@ -45,7 +45,7 @@ Agenda for today:
  
  If you want to know more about MySQL Cluster I recommend looking at these 2 books:
 - [Pro MySQL NDB Cluster](https://www.apress.com/br/book/9781484229811)
-- [MySQL Cluster 7.5 inside and out](https://www.adlibris.com/se/bok/mysql-cluster-75-inside-and-out-mysql-cluster-75-inside-and-out-9789176997574)
+- [MySQL Cluster 7.5 inside and out](https://www.adlibris.com/se/bok/mysql-cluster-75-inside-and-out-9789176998144)
 
 Our MySQL Cluster blogs and manuals:
 - [MySQL Cluser Carrier Grade Edition](https://www.mysql.com/products/cluster/) 
