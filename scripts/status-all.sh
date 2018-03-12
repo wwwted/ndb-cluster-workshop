@@ -3,13 +3,13 @@ echo " "
 echo "show cluster status mycluster"
 echo "Press <ENTER> to continue"
 read
-/home/ted/demos/mcm/mcm/bin/mcm -e"show status -r mycluster"
+mcm -e"show status -r mycluster"
 
 echo " "
 echo "show cluster status mycluster2"
 echo "Press <ENTER> to continue"
 read
-/home/ted/demos/mcm/mcm/bin/mcm -e"show status -r mycluster2"
+mcm -e"show status -r mycluster2"
 
 echo " "
 echo "show slave status on 53316"
