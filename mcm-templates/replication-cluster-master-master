@@ -1,0 +1,49 @@
+create site --hosts=127.0.0.1 mysite;
+add package --basedir=/home/ted/demos/mcm/cluster-758 cluster758;
+
+create cluster --package=cluster758 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
+add process --processhosts=mysqld@127.0.0.1,mysqld@127.0.0.1 mycluster;
+add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
+add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
+set port:mysqld:50=53316 mycluster;
+set port:mysqld:51=53317 mycluster;
+set PortNumber:ndb_mgmd:49=1186 mycluster;
+set server-id:mysqld:50=53316 mycluster;
+set server-id:mysqld:51=53317 mycluster;
+set binlog-format:mysqld=ROW mycluster;
+set log-bin:mysqld=binlog mycluster;
+set ndb_batch_size:mysqld=16M mycluster;
+set slave_allow_batching:mysqld=1 mycluster;
+# configuration options below are only for active-active (with conflict resolution)
+set ndb_log_updated_only:mysqld=ON mycluster;
+set ndb_log_apply_status:mysqld=ON mycluster;
+set slave_skip_errors:mysqld=ddl_exist_errors mycluster;
+set ndb_log_update_as_write:mysqld=OFF mycluster;
+set ndb_log_transaction_id:mysqld=1 mycluster;
+
+create cluster --package=cluster758 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster2;
+add process --processhosts=mysqld@127.0.0.1,mysqld@127.0.0.1 mycluster2;
+add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster2;
+add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster2;
+set port:mysqld:50=53326 mycluster2;
+set port:mysqld:51=53327 mycluster2;
+set PortNumber:ndb_mgmd:49=1286 mycluster2;
+set server-id:mysqld:50=53326 mycluster2;
+set server-id:mysqld:51=53327 mycluster2;
+set binlog-format:mysqld=ROW mycluster2;
+set log-bin:mysqld=binlog mycluster2;
+set ndb_batch_size:mysqld=16M mycluster2;
+set slave_allow_batching:mysqld=1 mycluster2;
+# configuration options below are only for active-active (with conflict resolution)
+set ndb_log_updated_only:mysqld=ON mycluster2;
+set ndb_log_apply_status:mysqld=ON mycluster2;
+set slave_skip_errors:mysqld=ddl_exist_errors mycluster2;
+set ndb_log_update_as_write:mysqld=OFF mycluster2;
+set ndb_log_transaction_id:mysqld=1 mycluster2;
+
+start cluster mycluster;
+show status -r mycluster;
+
+start cluster mycluster2;
+show status -r mycluster2;
+
