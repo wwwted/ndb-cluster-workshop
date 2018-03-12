@@ -11,6 +11,11 @@
 # Demo script to move replication chanel as shown above
 #
 
+if [ -z "$WS_HOME" ]; then
+    echo "Need to set environment variable WS_HOME, run command: bash> . ./setenv"
+    exit 1
+fi  
+
 echo "Starting channel cut-over from (MySQL-53316 ---X---> MySQL-53326) to (MySQL-53317 -----> MySQL-53327 (slave))"
 echo "press <ENTER> to continue"
 read

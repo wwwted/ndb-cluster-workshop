@@ -8,6 +8,11 @@
 #   MySQL-53316   ----------->   MySQL-53326 (slave)
 #
 
+if [ -z "$WS_HOME" ]; then
+    echo "Need to set environment variable WS_HOME, run command: bash> . ./setenv"
+    exit 1
+fi  
+
 #
 # Configure replication MySQL-53316 -> MySQL-53326 (slave)
 #
