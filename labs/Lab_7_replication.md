@@ -2,7 +2,7 @@
 
 # Lab 7 - Adding Geographic redundancy to MySQL Cluster
 
-With MySQL Cluster you have two options to achieve geographic redundancy, either you create 2 MySQL Cluster sites in different locations and use MySQL asynchronous replication to keep them in sync or you 'streach' one installation of one cluster over 2 locations separated by some distance.
+With MySQL Cluster you have two options to achieve geographic redundancy, either you create 2 MySQL Cluster sites in different locations and use MySQL asynchronous replication to keep them in sync or you 'stretch' one installation of one cluster over 2 locations separated by some distance.
 
 More information in our manual [here](https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-replication.html).
 
@@ -19,7 +19,7 @@ More information in our manual [here](https://dev.mysql.com/doc/refman/5.7/en/my
 | DataNode3  DataNode4 |                       | DataNode3    DataNode4 |  Node Group 2
 ------------------------                       --------------------------
 ```
-##### One streached cluster
+##### One stretched cluster
 ```
          DC1                                           DC2
        -------                                       -------
