@@ -92,6 +92,7 @@ Ndb_api_bytes_sent_count_slave - Roughly amount of data applied
 Ndb_api_trans_commit_count_slave - Roughly the number of binlog transactions applied
 
 Insert some data on either MySQL-53316 or MySQL-53317
+(mysql -uroot -P53316 -h127.0.0.1)
 ```
 mysql> create database test;
 mysql> use test;
