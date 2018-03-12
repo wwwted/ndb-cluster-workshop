@@ -81,7 +81,7 @@ mysql -uroot -P53317 -h127.0.0.1 < tools/create-ndb-testdata.sql
 And look at: `watch ./scripts/slave-epocs.sh` at the same time.
 Both MySQL nodes should have same status.
 
-Let's see how efficient our we are batching on slaver server (log into slave server 53326)
+Let's see how efficient we are batching on slaver server (log into slave server 53326)
 ```
 mysql> SELECT * from performance_schema.global_status WHERE VARIABLE_NAME IN ('Ndb_api_wait_exec_complete_count_slave','Ndb_api_trans_commit_count_slave','Ndb_api_bytes_sent_count_slave');
 ```
