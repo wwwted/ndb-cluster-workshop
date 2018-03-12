@@ -79,7 +79,7 @@ Start MCM daemon (mcmd) (replace X with real version number)
 
 Grep for mcmd process and inspect end of log file and verify that mcmd started okay.
 ```
-ps -wwaux | grep ssh | grep -v grep
+ps -wwaux | grep mcmd | grep -v grep
 tail -50 mcmd.log
 ```
 
