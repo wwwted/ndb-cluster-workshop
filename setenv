@@ -1,2 +1,2 @@
 export WS_HOME=$PWD
-export PATH=${WS_HOME}/cluster-758/bin:$PATH
+export PATH=${WS_HOME}/cluster-758/bin:${WS_HOME}/mcm/bin:$PATH
