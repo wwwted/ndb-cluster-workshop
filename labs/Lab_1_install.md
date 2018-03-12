@@ -64,7 +64,7 @@ manager-directory = /home/<user>/MCM_LAB/mcm_data
 
 Create simple file to set the path to the binaries, name it `setenv` and put it in your MCM_LAB/ folder
 ```
-EXPORT PATH=/home/<user>/MCM_LAB/cluster-75X/bin:/home/<user>/MCM_LAB/mcm/bin:$PATH
+export PATH=/home/<user>/MCM_LAB/cluster-75X/bin:/home/<user>/MCM_LAB/mcm/bin:$PATH
 ```
 (remember to exchange `<user>` and version numbers above with real values) 
 You will need to run below command (or manually set the PATH) in all terminals before trying to access mcm otherwice it will not be able to locate mysql client.
