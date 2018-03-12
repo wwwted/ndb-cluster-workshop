@@ -94,5 +94,6 @@ If you want to re-create the test simply run:
 And we can start from the beginning by creating the 2 clusters.
 
 #### Active/Active setup anf conflict resolution
+Will be added soon ...
 
 **[Back to Agenda](./../README.md)**
