@@ -81,6 +81,30 @@ mysql -uroot -P53317 -h127.0.0.1 < tools/create-ndb-testdata.sql
 And look at: `watch ./scripts/slave-epocs.sh` at the same time.
 Both MySQL nodes should have same status.
 
+Let's see how efficient our we are batching on slaver server (log into slave server 53326)
+```
+mysql> SELECT * from performance_schema.global_status WHERE VARIABLE_NAME IN ('Ndb_api_wait_exec_complete_count_slave','Ndb_api_trans_commit_count_slave','Ndb_api_bytes_sent_count_slave');
+```
+Ndb_api_wait_exec_complete_count_slave - Roughly slave batch count
+Ndb_api_bytes_sent_count_slave - Roughly amount of data applied
+Ndb_api_trans_commit_count_slave - Roughly the number of binlog transactions applied
+
+Insert some data on either MySQL-53316 or MySQL-53317
+```
+mysql> create database test;
+mysql> use test;
+mysql> create table t1 (i int) engine=ndbcluster;
+mysql> insert into test.t1 values (2); insert into test.t1 values (3); insert into test.t1 values (4); insert into test.t1 values (7);
+```
+Run the insert statement multiple times and look at output from `performance_schema.global_status` above.
+
+Disable batching
+```
+mcm> set slave_allow_batching:mysqld=0 mycluster2;
+```
+And run some more insert statemets (inserting 4 rows) and look at batching efficiency using SELECT statement above.
+In this small test we see that batching works well when enabled, the value of Ndb_api_wait_exec_complete_count_slave and Ndb_api_trans_commit_count_slave have matching numbers.
+
 Run channel cut-over from MySQL-53316 -> MySQL-53326 to MySQL-53317 -> MySQL-53327
 ```
 ./scripts/chanel-cut-over.sh
