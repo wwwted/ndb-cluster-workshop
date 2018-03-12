@@ -13,6 +13,10 @@ Steps below need to be done on all servers that are to be part of the MySQL Clus
                      mcm1.4.X/
                      mcm -> /home/<user>/MCM_LAB/mcm1.4.X
                      mcm_data/
+                     scripts/
+                     tools/
+                     mcm-templates/
+                     dosc/
                      mcmd.ini
                      setenv
 ```
@@ -22,6 +26,21 @@ Create a folder for the workshop
 ```
 mkdir MCM_LAB
 cd MCM_LAB
+```
+
+Dowload workshop from github:
+```
+git clone https://github.com/wwwted/ndb-cluster-workshop.git
+```
+
+Copy tools, scripts and other material from git folder to MCM_LAB and remove the rest:
+```
+cp -fr ndb-cluster-workshop/scripts .
+cp -fr ndb-cluster-workshop/tools/ .
+cp -fr ndb-cluster-workshop/mcm-templates .
+cp -fr ndb-cluster-workshop/docs .
+cp -f  ndb-cluster-workshop/setenv .
+rm -fr ndb-cluster-workshop
 ```
 
 Extract mysql cluster manager and cluster binaries from tar files
@@ -62,14 +81,23 @@ Edit MCM configuration before starting MCM daemon, manager-directory should be p
 manager-directory = /home/<user>/MCM_LAB/mcm_data
 ```
 
-Create simple file to set the path to the binaries, name it `setenv` and put it in your MCM_LAB/ folder
+Update the setenv file if needed so PATH variable is correct (depends on version of cluster installed)
 ```
-export PATH=/home/<user>/MCM_LAB/cluster-75X/bin:/home/<user>/MCM_LAB/mcm/bin:$PATH
+export WS_HOME=$PWD
+export PATH=${WS_HOME}/cluster-758/bin:${WS_HOME}/mcm/bin:$PATH
 ```
-(remember to exchange `<user>` and version numbers above with real values) 
-You will need to run below command (or manually set the PATH) in all terminals before trying to access mcm otherwice it will not be able to locate mysql client.
+(remember to exchange version numbers if neeed) 
+You will need to run below command (or manually set the PATH) in all terminals before trying to access mcm otherwice it will not be able to locate mysql client and mcm.
 ```
 bash> . ./setenv
+```
+
+Verify that setenv worked by running:
+```
+bash$ which mysql
+bash$ which mcm
+bash$ env | grep PATH
+bash$ env | grep WS
 ```
 
 Start MCM daemon (mcmd) (replace X with real version number)
@@ -82,5 +110,11 @@ Grep for mcmd process and inspect end of log file and verify that mcmd started o
 ps -wwaux | grep mcmd | grep -v grep
 tail -50 mcmd.log
 ```
+
+If you want to start over you can run:
+```
+./scripts/reset.sh
+```
+This will remove all created cluster and content in mcm_data
 
 **[Back to Agenda](./../README.md)**
