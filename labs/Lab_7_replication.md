@@ -87,8 +87,8 @@ Let's see how efficient we are batching on slaver server (log into slave server 
 ```
 mysql> SELECT * from performance_schema.global_status WHERE VARIABLE_NAME IN ('Ndb_api_wait_exec_complete_count_slave','Ndb_api_trans_commit_count_slave','Ndb_api_bytes_sent_count_slave');
 ```
-Ndb_api_wait_exec_complete_count_slave - Roughly slave batch count
-Ndb_api_bytes_sent_count_slave - Roughly amount of data applied
+Ndb_api_wait_exec_complete_count_slave - Roughly slave batch count 
+Ndb_api_bytes_sent_count_slave - Roughly amount of data applied 
 Ndb_api_trans_commit_count_slave - Roughly the number of binlog transactions applied
 
 Insert some data on either MySQL-53316 or MySQL-53317
