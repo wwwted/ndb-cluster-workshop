@@ -22,6 +22,7 @@ Steps below need to be done on all servers that are to be part of the MySQL Clus
 ```
 
 ### 1. Install MySQL Cluster and MySQL Cluster Manager aka "MCM"
+(code snip for creating environment [here](https://gist.github.com/wwwted/62406be3a6863d28534e1dbf3249b396))
 Create a folder for the workshop
 ```
 mkdir MCM_LAB
