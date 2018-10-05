@@ -61,7 +61,7 @@ Before we can restore data we need to make sure we get current cluster into a cl
 ```
 mcm> stop cluster mycluster;
 mcm> start cluster --initial --skip-init=50,51 mycluster;
-     (--skip-init is to skip initialization for mysql nodes)
+     (--skip-init is to skip initialization for mysql nodes, make sure NodeID's are correct)
 ```
 Next step is to use recover the data using *BackupId* from "list backups" statement
 ```
