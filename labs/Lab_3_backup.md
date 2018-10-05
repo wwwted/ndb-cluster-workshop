@@ -57,14 +57,19 @@ Lets recover from last backup, first look at available backups and pick the last
 ```
 mcm> list backups mycluster;
 ```
-Next step is to use recover the data using *BackupId* from above
+Before we can restore data we need to make sure we get current cluster into a clean state:
+```
+mcm> stop cluster mycluster;
+mcm> start cluster --initial mycluster;
+```
+Next step is to use recover the data using *BackupId* from "list backups" statement
 ```
 mcm> restore cluster --backupid=3 --background mycluster;
 ```
-During recovery is running look at:
+During recovery we can follow the progress by looking at:
 ```
 mcm> show status --progressbar mycluster;
 ```
-If you want to re-run recovery just run the Disaster statment over again ;)
+If you want to re-run recovery just run the Disaster statement over again ;)
 
 **[Back to Agenda](./../README.md)**

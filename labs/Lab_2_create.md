@@ -64,9 +64,9 @@ mcm> add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
 mcm> add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
 ```
 
-As we are added 2 MySQL API nodes we need to make sure they have their own unique port numbers, lets assign port number 3310 to the first mysqld and 3311 to the second one.
+Since we have added 2 MySQL API nodes we need to make sure they have their own unique port numbers, lets assign port number 3310 to the first mysqld and 3311 to the second one.
 
-You might wonder about the number `50`and `51`, these are so called Node ID that are used to identify different processed within a cluster. First 48 Node ID's are pre-allocated to data nodes (ndbmtd), then there is a range of 49-255 available for others. In our cluster the data nodes will get Node ID `1` and `2`, the management node will get ID `49`and the two mysql nodes `50` and `51`. You can also specify Node ID when creating your cluster using the `create cluster` command.
+You might wonder about the number `50`and `51`, these are so called Node ID that are used to identify different processes within a cluster. First 48 Node ID's are pre-allocated to data nodes (ndbmtd), then there is a range of 49-255 available for others. In our cluster the data nodes will get Node ID `1` and `2`, the management node will get ID `49`and the two mysql nodes `50` and `51`. You can also specify Node ID when creating your cluster using the `create cluster` command.
 ```
 mcm> set port:mysqld:50=3310 mycluster;
 mcm> set port:mysqld:51=3311 mycluster;
@@ -143,10 +143,10 @@ Structure is:
 mcd_data/
         clusters/
                  mycluster/
-                           <Process NodeID>
-                                           data/
-                                           logs/
-                                           tmp/
+                           <NodeID>
+                                   data/
+                                   logs/
+                                   tmp/
                            ...
 ```
 Node ID's for processes in our cluster are shown by running command `show status -r mycluster`
