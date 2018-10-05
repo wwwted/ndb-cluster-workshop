@@ -22,7 +22,7 @@ Our reference manual can be found [here](https://dev.mysql.com/doc/mysql-cluster
 ```
 Run a full backup of the cluster:
 ```
-mcm> backup cluster mycluster;
+mcm> backup cluster --waitstarted mycluster;
 ```
 If you have 2 mcm windows open you can track progress by running:
 ```
