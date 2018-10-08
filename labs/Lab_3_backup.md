@@ -22,7 +22,7 @@ Our reference manual can be found [here](https://dev.mysql.com/doc/mysql-cluster
 ```
 Run a full backup of the cluster:
 ```
-mcm> backup cluster mycluster;
+mcm> backup cluster --waitstarted mycluster;
 ```
 If you have 2 mcm windows open you can track progress by running:
 ```
@@ -60,7 +60,8 @@ mcm> list backups mycluster;
 Before we can restore data we need to make sure we get current cluster into a clean state:
 ```
 mcm> stop cluster mycluster;
-mcm> start cluster --initial mycluster;
+mcm> start cluster --initial --skip-init=50,51 mycluster;
+     (--skip-init is to skip initialization for mysql nodes, make sure NodeID's are correct)
 ```
 Next step is to use recover the data using *BackupId* from "list backups" statement
 ```
