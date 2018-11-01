@@ -84,9 +84,10 @@ Move MCM configuration file to $MCM_LAB top folder (replace X with real version 
 cp mcm_bin/etc/mcmd.ini .
 ```
 
-Edit MCM configuration before starting MCM daemon, manager-directory should be path to your MCM repository, you do not have to create the folder "mcm_data" as this is done at first start by mcmd.
+Edit MCM configuration before starting MCM daemon, manager-directory should be path to your MCM repository, you do not have to create the folder "mcm_data" as this is done at first start by mcmd. Also set path to the log file.
 ```
 manager-directory = /home/<user>/MCM_LAB/mcm_data
+log-file = /home/<user>/MCM_LAB/mcmd.log
 ```
 
 Update the setenv file if needed so PATH variable is correct (depends on version of cluster installed)
