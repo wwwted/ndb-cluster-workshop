@@ -110,7 +110,7 @@ bash$ env | grep WS
 
 Start MCM daemon (mcmd) (replace X with real version number)
 ```
-./mcm/bin/mcmd --defaults-file=./mcmd.ini --daemon
+mcmd --defaults-file=./mcmd.ini --daemon
 ```
 
 Grep for mcmd process and inspect end of log file and verify that mcmd started okay.
