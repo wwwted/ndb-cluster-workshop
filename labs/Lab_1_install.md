@@ -81,7 +81,7 @@ ln -s  cluster-75X ndb_bin
 
 Move MCM configuration file to $MCM_LAB top folder (replace X with real version number)
 ```
-cp mcm/etc/mcmd.ini .
+cp mcm_bin/etc/mcmd.ini .
 ```
 
 Edit MCM configuration before starting MCM daemon, manager-directory should be path to your MCM repository, you do not have to create the folder "mcm_data" as this is done at first start by mcmd.
