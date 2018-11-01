@@ -9,14 +9,15 @@ Steps below need to be done on all servers that are to be part of the MySQL Clus
 ### Target environment for HOL
 ```
 /home/<user>/MCM_LAB/
-                     cluster-75X/ (replace X with real version number)
-                     mcm1.4.X/
-                     mcm -> /home/<user>/MCM_LAB/mcm1.4.X
+                     cluster-7XX/ (replace X with real version number)
+                     mcm1.X.X/
+                     ndb_bin -> /home/<user>/MCM_LAB/cluster-7XX/
+                     mcm_bin -> /home/<user>/MCM_LAB/mcm1.X.X
                      mcm_data/
                      scripts/
                      tools/
                      mcm-templates/
-                     dosc/
+                     docs/
                      mcmd.ini
                      setenv
 ```
@@ -63,9 +64,9 @@ mv mcm-1.4.X-linux-glibc2.12-x86-64bit/mcm1.4.X .
 rmdir mcm-1.4.X-linux-glibc2.12-x86-64bit
 ```
 
-Create a soft link called only `mcm` that point to folder mcm1.4.X like
+Create a soft link called only `mcm_bin` that point to folder mcm1.4.X like
 ```
-ln -s mcm1.4.X mcm
+ln -s mcm1.4.X mcm_bin
 ```
 You should se the folowing folders under mcm catalogue:
 ```
@@ -73,20 +74,26 @@ bash$ ls mcm/
 bin  etc  lib  libexec  licenses  share  var
 ```
 
-Move MCM configuration file to $MCM_LAB top folder (replace X with real version number)
+Create a soft link to ndb binaries like:
 ```
-cp mcm/etc/mcmd.ini .
+ln -s  cluster-75X ndb_bin
 ```
 
-Edit MCM configuration before starting MCM daemon, manager-directory should be path to your MCM repository, you do not have to create the folder "mcm_data" as this is done at first start by mcmd.
+Move MCM configuration file to $MCM_LAB top folder (replace X with real version number)
+```
+cp mcm_bin/etc/mcmd.ini .
+```
+
+Edit MCM configuration before starting MCM daemon, manager-directory should be path to your MCM repository, you do not have to create the folder "mcm_data" as this is done at first start by mcmd. Also set path to the log file.
 ```
 manager-directory = /home/<user>/MCM_LAB/mcm_data
+log-file = /home/<user>/MCM_LAB/mcmd.log
 ```
 
 Update the setenv file if needed so PATH variable is correct (depends on version of cluster installed)
 ```
 export WS_HOME=$PWD
-export PATH=${WS_HOME}/cluster-758/bin:${WS_HOME}/mcm/bin:$PATH
+export PATH=${WS_HOME}/ndb_bin/bin:${WS_HOME}/mcm_bin/bin:$PATH
 ```
 (remember to exchange version numbers if neeed) 
 You will need to run below command (or manually set the PATH) in all terminals before trying to access mcm otherwice it will not be able to locate mysql client and mcm.
@@ -104,7 +111,7 @@ bash$ env | grep WS
 
 Start MCM daemon (mcmd) (replace X with real version number)
 ```
-./mcm/bin/mcmd --defaults-file=./mcmd.ini --daemon
+mcmd --defaults-file=./mcmd.ini --daemon
 ```
 
 Grep for mcmd process and inspect end of log file and verify that mcmd started okay.
