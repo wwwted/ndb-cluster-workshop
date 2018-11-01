@@ -92,7 +92,7 @@ manager-directory = /home/<user>/MCM_LAB/mcm_data
 Update the setenv file if needed so PATH variable is correct (depends on version of cluster installed)
 ```
 export WS_HOME=$PWD
-export PATH=${WS_HOME}/cluster-758/bin:${WS_HOME}/mcm/bin:$PATH
+export PATH=${WS_HOME}/ndb_bin/bin:${WS_HOME}/mcm_bin/bin:$PATH
 ```
 (remember to exchange version numbers if neeed) 
 You will need to run below command (or manually set the PATH) in all terminals before trying to access mcm otherwice it will not be able to locate mysql client and mcm.
