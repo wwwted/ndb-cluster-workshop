@@ -109,7 +109,7 @@ bash$ env | grep PATH
 bash$ env | grep WS
 ```
 
-Start MCM daemon (mcmd) (replace X with real version number)
+Start MCM daemon (mcmd)
 ```
 mcmd --defaults-file=./mcmd.ini --daemon
 ```
