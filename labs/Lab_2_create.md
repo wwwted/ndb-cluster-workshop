@@ -39,9 +39,9 @@ mcm> list sites;
 mcm> list hosts mysite;
 ```
 
-Next step is to add the NDB Cluster binaries (called packade in mcm) to our site so we can start configuring our cluster. The arguments you are providing are the search path to the base folder of the binareies and a alias name to be user internally when refering to the package, lets call them cluster758 (or whatever version number you installed).
+Next step is to add the NDB Cluster binaries (called packade in mcm) to our site so we can start configuring our cluster. The arguments you are providing are the search path to the base folder of the binareies and a alias name to be user internally when refering to the package, lets call them cluster7512 (or whatever version number you installed).
 ```
-mcm> add package --basedir=/home/<user>/MCM_LAB/cluster-758 cluster758;
+mcm> add package --basedir=/home/<user>/MCM_LAB/cluster-7512 cluster7512;
 ```
 
 You can have many different packages added to your sites, you can also have different clusters using different packages, to list the packages you have available use commmand:
@@ -49,7 +49,7 @@ You can have many different packages added to your sites, you can also have diff
 mcm> list packages mysite;
 ```
 Next step is to create our cluster, this is done with the `create cluster` command, we will need to provide a package, the different processes we want to create (and their location) and set a name of our cluster.
-Lets use the package we created earlier called `cluster758` and lets name our cluster mycluster.
+Lets use the package we created earlier called `cluster7512` and lets name our cluster mycluster.
 The argument `--processhosts` takes a list of `processtype@host`as argument, the type of processes are ndb, ndbmtd, ndb_mgmd, mydsqld and api.
 
 We will create a cluster with below processses, all processes running on local server (127.0.0.1):
@@ -58,7 +58,7 @@ We will create a cluster with below processses, all processes running on local s
 - 2 MySQL API nodes (mysqld)
 - 4 API slots for any process to connect (we will use these for tools later on)
 ```
-mcm> create cluster --package=cluster758 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
+mcm> create cluster --package=cluster7512 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
 mcm> add process --processhosts=mysqld@127.0.0.1,mysqld@127.0.0.1 mycluster;
 mcm> add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
 mcm> add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
@@ -112,16 +112,16 @@ mcm> show status -r mycluster;
 ```
 After our cluster is up and running it's time to set some passwords for MySQL API nodes
 ```
-./cluster-758/bin/mysqladmin -h127.0.0.1 -P3310 -uroot password 'root'
-./cluster-758/bin/mysqladmin -h127.0.0.1 -P3311 -uroot password 'root'
+mysqladmin -h127.0.0.1 -P3310 -uroot password 'root'
+mysqladmin -h127.0.0.1 -P3311 -uroot password 'root'
 ```
 
 #### Automate the configuration/start of cluster (Not part of workshop)
 We can put all MCM commands in one file:
 ```
 create site --hosts=127.0.0.1 mysite;
-add package --basedir=/home/<user>/MCM_LAB/cluster-758 cluster758;
-create cluster --package=cluster758 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
+add package --basedir=/home/<user>/MCM_LAB/cluster-7512 cluster7512;
+create cluster --package=cluster7512 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
 add process --processhosts=mysqld@127.0.0.1,mysqld@127.0.0.1 mycluster;
 add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
 add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
