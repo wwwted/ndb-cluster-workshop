@@ -1,0 +1,8 @@
+create site --hosts=127.0.0.1 mysite;
+add package --basedir=/home/ted/MCM_LAB2/cluster-7512 cluster7512;
+create cluster --package=cluster7512 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
+add process --processhosts=mysqld@127.0.0.1,mysqld@127.0.0.1 mycluster;
+add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
+add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
+set port:mysqld:50=3310 mycluster;
+set port:mysqld:51=3311 mycluster;
