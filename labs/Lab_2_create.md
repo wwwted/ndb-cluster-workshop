@@ -91,6 +91,7 @@ Now we can run:
 mcm> show status -r mycluster;
 mcm> show status --progress mycluster;
 mcm> show status --progressbar mycluster;
+watch "mcm -e'show status -r mycluster'"
 ```
 And see how the processes are starting.
 Once all processes have started you should see `Status` being `Running` for the management, data and MySQL nodes as shown below.
