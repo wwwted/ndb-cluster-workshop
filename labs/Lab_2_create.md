@@ -121,8 +121,8 @@ mysqladmin -h127.0.0.1 -P3311 -uroot password 'root'
 We can put all MCM commands in one file:
 ```
 create site --hosts=127.0.0.1 mysite;
-add package --basedir=/home/<user>/MCM_LAB/cluster-7512 cluster7512;
-create cluster --package=cluster7512 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
+add package --basedir=/home/ted/ndb-cluster-workshop/cluster-769 cluster769;
+create cluster --package=cluster769 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
 add process --processhosts=mysqld@127.0.0.1,mysqld@127.0.0.1 mycluster;
 add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
 add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
