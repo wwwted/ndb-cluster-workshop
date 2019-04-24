@@ -1,22 +1,36 @@
 #!/bin/bash
-# wget https://dev.mysql.com/get/Downloads/MySQL-Cluster-7.5/mysql-cluster-gpl-7.5.12-linux-glibc2.12-x86_64.tar.gz
+# wget https://dev.mysql.com/get/Downloads/MySQL-Cluster-7.6/mysql-cluster-gpl-7.6.9-linux-glibc2.12-x86_64.tar.gz
+# Download MCM by following my guide on Github here: https://github.com/wwwted/ndb-cluster-workshop/blob/master/labs/prework.md
 
-TARGET_DIR="/home/ted/MCM_LAB2"
-BIN_DIR="/home/ted/src"
+# Download NDB 7.6.9 and MCM 1.4.7 + change BIN_DIR to folder with binaries in tar.gz format.
+# TARGET_DIR is where you downloaded the workshop (git clone https://github.com/wwwted/ndb-cluster-workshop.git)
 
+TARGET_DIR="/home/ted/ndb-cluster-workshop"
+NDB_BIN="/home/ted/src/mysql-cluster-gpl-7.6.9-linux-glibc2.12-x86_64.tar.gz"
+MCM_BIN="/home/ted/src/mcm-1.4.7-linux-glibc2.12-x86-64bit.tar.gz"
+
+# You should not have to change anything below 
 cd $TARGET_DIR
 
-tar xzf $BIN_DIR/mysql-cluster-gpl-7.5.12-linux-glibc2.12-x86_64.tar.gz
-# tar xzf $BIN_DIR/mysql-cluster-gpl-7.5.9-linux-glibc2.12-x86_64.tar.gz
-tar xzf $BIN_DIR/mcm-1.4.6-linux-glibc2.12-x86-64bit.tar.gz
+if [ ! -f "$NDB_BIN" ]
+then
+   echo "Can not find NDB binaries ($NDB_BIN), exiting..."
+   exit 1
+fi
+tar xzf $NDB_BIN
+mv mysql-cluster-gpl-7.6.9-linux-glibc2.12-x86_64 cluster-769
 
-mv mysql-cluster-gpl-7.5.12-linux-glibc2.12-x86_64 cluster-7512
-# mv mysql-cluster-gpl-7.5.9-linux-glibc2.12-x86_64/ cluster-759
+if [ ! -f "$MCM_BIN" ]
+then
+   echo "Can not find MCM binaries ($MCM_BIN), exiting..."
+   exit 1
+fi
+tar xzf $MCM_BIN
+mv mcm-1.4.7-linux-linux-glibc2.12-x86-64bit/mcm1.4.7 .
+rmdir mcm-1.4.7-linux-linux-glibc2.12-x86-64bit
 
-mv mcm-1.4.6-linux-glibc2.12-x86-64bit/mcm1.4.6 .
-rmdir mcm-1.4.6-linux-glibc2.12-x86-64bit
-ln -s mcm1.4.6/ mcm_bin
-ln -s cluster-7512 ndb_bin
+ln -s mcm1.4.7/ mcm_bin
+ln -s cluster-769 ndb_bin
 
 cp mcm_bin/etc/mcmd.ini .
 echo "manager-directory = $TARGET_DIR/mcm_data" >> $TARGET_DIR/mcmd.ini
