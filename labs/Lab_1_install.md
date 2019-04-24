@@ -8,7 +8,7 @@ Steps below need to be done on all servers that are to be part of the MySQL Clus
 
 ### Target environment for HOL
 ```
-/home/<user>/MCM_LAB/
+/home/<user>/ndb-cluster-workshop/
                      cluster-7XX/ (replace X with real version number)
                      mcm1.X.X/
                      ndb_bin -> /home/<user>/MCM_LAB/cluster-7XX/
@@ -25,78 +25,17 @@ Steps below need to be done on all servers that are to be part of the MySQL Clus
 ### 1. Install MySQL Cluster and MySQL Cluster Manager aka "MCM"
 (code snip for creating environment [here](https://gist.github.com/wwwted/62406be3a6863d28534e1dbf3249b396))
 
-Create a folder for the workshop
-```
-mkdir MCM_LAB
-cd MCM_LAB
-```
-
 Dowload workshop from github:
 ```
 git clone https://github.com/wwwted/ndb-cluster-workshop.git
 ```
-
-Copy tools, scripts and other material from git folder to MCM_LAB and remove the rest:
+Prior to running createEnc.sh you need to download all needed SW (NDB binaries and MCM binaries) and change parameter "BIN_DIR" to where the tar.gz binary packages are located.
+Go into workshop folder and run script tools/createEnv.sh
 ```
-cp -fr ndb-cluster-workshop/scripts .
-cp -fr ndb-cluster-workshop/tools/ .
-cp -fr ndb-cluster-workshop/mcm-templates .
-cp -fr ndb-cluster-workshop/docs .
-cp -f  ndb-cluster-workshop/setenv .
-rm -fr ndb-cluster-workshop
+cd ndb-cluster-workshop
+./tools/createEnv.sh
 ```
-
-Extract mysql cluster manager and cluster binaries from tar files
-(first step is to unzip tar packages from tar files)
-```
-tar xzf /path/to/cluster/binaries/mysql-cluster-advanced-7.5.X-linux-glibc2.12-x86_64.tar.gz
-tar xzf /path/to/cluster/binaries/mcm-1.4.X-linux-glibc2.12-x86-64bit.tar.gz
-```
-
-Rename cluster binaries to cluster-75X (replace X with real version number)
-```
-mv mysql-cluster-advanced-7.5.X-linux-glibc2.12-x86_64.tar.gz cluster-75X
-```
-
-Move MCM binaries folder to $MCM_LAB (replace X with real version number)
-```
-mv mcm-1.4.X-linux-glibc2.12-x86-64bit/mcm1.4.X .
-rmdir mcm-1.4.X-linux-glibc2.12-x86-64bit
-```
-
-Create a soft link called only `mcm_bin` that point to folder mcm1.4.X like
-```
-ln -s mcm1.4.X mcm_bin
-```
-You should se the folowing folders under mcm catalogue:
-```
-bash$ ls mcm/
-bin  etc  lib  libexec  licenses  share  var
-```
-
-Create a soft link to ndb binaries like:
-```
-ln -s  cluster-75X ndb_bin
-```
-
-Move MCM configuration file to $MCM_LAB top folder (replace X with real version number)
-```
-cp mcm_bin/etc/mcmd.ini .
-```
-
-Edit MCM configuration before starting MCM daemon, manager-directory should be path to your MCM repository, you do not have to create the folder "mcm_data" as this is done at first start by mcmd. Also set path to the log file.
-```
-manager-directory = /home/<user>/MCM_LAB/mcm_data
-log-file = /home/<user>/MCM_LAB/mcmd.log
-```
-
-Update the setenv file if needed so PATH variable is correct (depends on version of cluster installed)
-```
-export WS_HOME=$PWD
-export PATH=${WS_HOME}/ndb_bin/bin:${WS_HOME}/mcm_bin/bin:$PATH
-```
-(remember to exchange version numbers if neeed) 
-You will need to run below command (or manually set the PATH) in all terminals before trying to access mcm otherwice it will not be able to locate mysql client and mcm.
+You will need to run below command (or manually set the PATH) in all terminals before trying to access mcm or ndb binaries otherwice it will not work. Below command also set an environment varieble used by other scripts so run setenv before running any scripts/tools included in workshop.
 ```
 bash> . ./setenv
 ```
