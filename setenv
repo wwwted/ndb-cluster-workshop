@@ -1,2 +1,0 @@
-export WS_HOME=$PWD
-export PATH=${WS_HOME}/ndb_bin/bin:${WS_HOME}/mcm_bin/bin:$PATH
