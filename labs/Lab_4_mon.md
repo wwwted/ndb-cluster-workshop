@@ -24,7 +24,7 @@ mysql -uroot -proot -P3311 -h127.0.0.1 < create_ndb_testdata.sql
 
 #### dict_obj_info
 The dict_obj_info table provides information about NDB data dictionary (DICT) objects such as tables and indexes.
-Lets find some information about our test table created above, if you want to filer out some schemas or tables add where clause to statement and filter on fq_name, format of fq_name is \<schema\>/def/\<table\> as seen for our test table below.
+Lets find some information about our test table created above, if you want to filter out some schemas or tables add where clause to statement and filter on fq_name, format of fq_name is \<schema\>/def/\<table\> as seen for our test table below.
 ```
 mysql> select * from dict_obj_info where fq_name='ted/def/test';                   
 +------+------+---------+-------+-----------------+---------------+--------------+
@@ -61,6 +61,24 @@ mysql> select dot.type_name, do2.id,do2.parent_obj_id, do2.fq_name from dict_obj
 | Index trigger |    1 |            11 | NDB$INDEX_11_CUSTOM |
 | Index trigger |    2 |            12 | NDB$INDEX_12_CUSTOM |
 +---------------+------+---------------+---------------------+
+```
+
+#### config_values and config_params
+All the configuration of NBD data nodes is stored in table config_values, additional meta data is stored in table config_params. If you want to find all parameter settings for LCP do a search like:
+```
+mysql> SELECT cv.node_id, cp.param_name, cv.config_value FROM config_values cv, config_params cp WHERE cv.config_param=cp.param_number AND cp.param_name LIKE '%lcp%';
++---------+------------------------+--------------+
+| node_id | param_name             | config_value |
++---------+------------------------+--------------+
+|       1 | CompressedLCP          | 0            |
+|       2 | CompressedLCP          | 0            |
+|       1 | MaxLCPStartDelay       | 0            |
+|       2 | MaxLCPStartDelay       | 0            |
+|       1 | LcpScanProgressTimeout | 60           |
+|       2 | LcpScanProgressTimeout | 60           |
+|       1 | EnablePartialLcp       | 1            |
+|       2 | EnablePartialLcp       | 1            |
++---------+------------------------+--------------+
 ```
 
 #### node
