@@ -39,9 +39,9 @@ mcm> list sites;
 mcm> list hosts mysite;
 ```
 
-Next step is to add the NDB Cluster binaries (called packade in mcm) to our site so we can start configuring our cluster. The arguments you are providing are the search path to the base folder of the binareies and a alias name to be user internally when refering to the package, lets call them cluster7512 (or whatever version number you installed).
+Next step is to add the NDB Cluster binaries (called packade in mcm) to our site so we can start configuring our cluster. The arguments you are providing are the search path to the base folder of the binareies and a alias name to be user internally when refering to the package, lets call them cluster769 (or whatever version number you installed).
 ```
-mcm> add package --basedir=/home/<user>/MCM_LAB/cluster-7512 cluster7512;
+mcm> add package --basedir=/home/<user-name>/ndb-cluster-workshop/cluster-769;
 ```
 
 You can have many different packages added to your sites, you can also have different clusters using different packages, to list the packages you have available use commmand:
@@ -49,7 +49,7 @@ You can have many different packages added to your sites, you can also have diff
 mcm> list packages mysite;
 ```
 Next step is to create our cluster, this is done with the `create cluster` command, we will need to provide a package, the different processes we want to create (and their location) and set a name of our cluster.
-Lets use the package we created earlier called `cluster7512` and lets name our cluster mycluster.
+Lets use the package we created earlier called `cluster769` and lets name our cluster mycluster.
 The argument `--processhosts` takes a list of `processtype@host`as argument, the type of processes are ndb, ndbmtd, ndb_mgmd, mydsqld and api.
 
 We will create a cluster with below processses, all processes running on local server (127.0.0.1):
@@ -58,7 +58,7 @@ We will create a cluster with below processses, all processes running on local s
 - 2 MySQL API nodes (mysqld)
 - 4 API slots for any process to connect (we will use these for tools later on)
 ```
-mcm> create cluster --package=cluster7512 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
+mcm> create cluster --package=cluster769 --processhosts=ndb_mgmd@127.0.0.1,ndbmtd@127.0.0.1,ndbmtd@127.0.0.1 mycluster;
 mcm> add process --processhosts=mysqld@127.0.0.1,mysqld@127.0.0.1 mycluster;
 mcm> add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
 mcm> add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
