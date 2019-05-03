@@ -41,7 +41,7 @@ mcm> list hosts mysite;
 
 Next step is to add the NDB Cluster binaries (called packade in mcm) to our site so we can start configuring our cluster. The arguments you are providing are the search path to the base folder of the binareies and a alias name to be user internally when refering to the package, lets call them cluster769 (or whatever version number you installed).
 ```
-mcm> add package --basedir=/home/<user-name>/ndb-cluster-workshop/cluster-769;
+mcm> add package --basedir=/home/<user-name>/ndb-cluster-workshop/cluster-769 mysite;
 ```
 
 You can have many different packages added to your sites, you can also have different clusters using different packages, to list the packages you have available use commmand:
