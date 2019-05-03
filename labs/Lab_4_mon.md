@@ -182,6 +182,21 @@ mysql> select * from config_nodes;
 |      55 | API       | 127.0.0.1     |
 +---------+-----------+---------------+
 ```
+#### processes
+List of all the processes currently running in the cluster.
+
+```
+mysql> select * from processes;
++---------+-----------+------------------------+------------+------------------+--------------+------------------------+
+| node_id | node_type | node_version           | process_id | angel_process_id | process_name | service_URI            |
++---------+-----------+------------------------+------------+------------------+--------------+------------------------+
+|       1 | NDB       | mysql-5.7.25 ndb-7.6.9 |       9421 |             NULL | ndbmtd       | ndb://127.0.0.1        |
+|       2 | NDB       | mysql-5.7.25 ndb-7.6.9 |       9422 |             NULL | ndbmtd       | ndb://127.0.0.1        |
+|      49 | MGM       | mysql-5.7.25 ndb-7.6.9 |       9392 |             NULL | ndb_mgmd     | ndb://127.0.0.1:1186   |
+|      50 | API       | mysql-5.7.25 ndb-7.6.9 |       9798 |             NULL | mysqld       | mysql://127.0.0.1:3310 |
+|      51 | API       | mysql-5.7.25 ndb-7.6.9 |      10038 |             NULL | mysqld       | mysql://127.0.0.1:3311 |
++---------+-----------+------------------------+------------+------------------+--------------+------------------------+
+```
 
 #### logspaces
 This table provides information about NDB Cluster Redo log usage and space left. This information is good to monitor so you do not run out of redo log space, if this happens the cluster will reject new transations until we have freed (happens when we complete next local checkpoint) up space in the redo logs.
