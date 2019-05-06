@@ -54,7 +54,7 @@ Automate monitoring of memory usage in separat terminal using `watch` command.
 ```
 watch "mysql -uroot -proot -h127.0.0.1 -P3310 -e'select node_id, memory_type, (used/total)*100 as Used_Memory_pct from ndbinfo.memoryusage;'"
 ```
-As you can see, just before mysqlslap fails we are running out of datamemory on both data nodes. Default amount of memory allocated for datamemory is 80M.
+As you can see, just before mysqlslap fails we are running out of datamemory on both data nodes. Default amount of memory allocated for datamemory is 80M. Memory usage can also be seen in the cluster log on the management node (tail -f ./mcm_data/clusters/mycluster/49/data/ndb_49_cluster.log) or via ndb_mgm (ndb_mgm + run "ALL REPORT MEMORYUSAGE;").
 ```
 mcm> get -d datamemory:ndbmtd mycluster;
 +------------+----------+----------+---------+----------+---------+---------+---------+
