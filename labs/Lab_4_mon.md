@@ -17,7 +17,7 @@ mysql -uroot -proot -P3311 -h127.0.0.1 ndbinfo
   or provide socket file like:
 mysql -uroot -proot -S/tmp/mysql.mycluster.50.sock  ndbinfo
 ```
-Before we start running queries aganst ndbinfo tables lets add some random data, copy commands [here](https://gist.github.com/wwwted/10656c765dac2c988ba567d5c710c7e6) put them in a file named *create-ndb-testdata.sql* or download zip-file and then run command below.
+Before we start running queries aganst ndbinfo tables lets add some random data, copy commands [here](https://gist.github.com/wwwted/10656c765dac2c988ba567d5c710c7e6) put them in a file named *create-ndb-testdata.sql* or use file in the tools folder then run command below.
 ```
 mysql -uroot -proot -P3311 -h127.0.0.1 < create-ndb-testdata.sql
 ```
