@@ -24,7 +24,7 @@ mysql -uroot -proot -P3311 -h127.0.0.1 < create_ndb_testdata.sql
 
 #### dict_obj_info
 The dict_obj_info table provides information about NDB data dictionary (DICT) objects such as tables and indexes.
-Lets find some information about our test table created above, if you want to filer out some schemas or tables add where clause to statement and filter on fq_name, format of fq_name is \<schema\>/def/\<table\> as seen for our test table below.
+Lets find some information about our test table created above, if you want to filter out some schemas or tables add where clause to statement and filter on fq_name, format of fq_name is \<schema\>/def/\<table\> as seen for our test table below.
 ```
 mysql> select * from dict_obj_info where fq_name='ted/def/test';                   
 +------+------+---------+-------+-----------------+---------------+--------------+
@@ -61,6 +61,24 @@ mysql> select dot.type_name, do2.id,do2.parent_obj_id, do2.fq_name from dict_obj
 | Index trigger |    1 |            11 | NDB$INDEX_11_CUSTOM |
 | Index trigger |    2 |            12 | NDB$INDEX_12_CUSTOM |
 +---------------+------+---------------+---------------------+
+```
+
+#### config_values and config_params
+All the configuration of NBD data nodes is stored in table config_values, additional meta data is stored in table config_params. If you want to find all parameter settings for LCP do a search like:
+```
+mysql> SELECT cv.node_id, cp.param_name, cv.config_value FROM config_values cv, config_params cp WHERE cv.config_param=cp.param_number AND cp.param_name LIKE '%lcp%';
++---------+------------------------+--------------+
+| node_id | param_name             | config_value |
++---------+------------------------+--------------+
+|       1 | CompressedLCP          | 0            |
+|       2 | CompressedLCP          | 0            |
+|       1 | MaxLCPStartDelay       | 0            |
+|       2 | MaxLCPStartDelay       | 0            |
+|       1 | LcpScanProgressTimeout | 60           |
+|       2 | LcpScanProgressTimeout | 60           |
+|       1 | EnablePartialLcp       | 1            |
+|       2 | EnablePartialLcp       | 1            |
++---------+------------------------+--------------+
 ```
 
 #### node
@@ -164,8 +182,23 @@ mysql> select * from config_nodes;
 |      55 | API       | 127.0.0.1     |
 +---------+-----------+---------------+
 ```
+#### processes
+List of all the processes currently running in the cluster.
 
-##### logspaces
+```
+mysql> select * from processes;
++---------+-----------+------------------------+------------+------------------+--------------+------------------------+
+| node_id | node_type | node_version           | process_id | angel_process_id | process_name | service_URI            |
++---------+-----------+------------------------+------------+------------------+--------------+------------------------+
+|       1 | NDB       | mysql-5.7.25 ndb-7.6.9 |       9421 |             NULL | ndbmtd       | ndb://127.0.0.1        |
+|       2 | NDB       | mysql-5.7.25 ndb-7.6.9 |       9422 |             NULL | ndbmtd       | ndb://127.0.0.1        |
+|      49 | MGM       | mysql-5.7.25 ndb-7.6.9 |       9392 |             NULL | ndb_mgmd     | ndb://127.0.0.1:1186   |
+|      50 | API       | mysql-5.7.25 ndb-7.6.9 |       9798 |             NULL | mysqld       | mysql://127.0.0.1:3310 |
+|      51 | API       | mysql-5.7.25 ndb-7.6.9 |      10038 |             NULL | mysqld       | mysql://127.0.0.1:3311 |
++---------+-----------+------------------------+------------+------------------+--------------+------------------------+
+```
+
+#### logspaces
 This table provides information about NDB Cluster Redo log usage and space left. This information is good to monitor so you do not run out of redo log space, if this happens the cluster will reject new transations until we have freed (happens when we complete next local checkpoint) up space in the redo logs.
 ```
 mysql> select * from logspaces;
@@ -181,6 +214,33 @@ mysql> select * from logspaces;
 |       2 | REDO     |      0 |        2 | 268435456 |       0 |
 |       2 | REDO     |      0 |        3 | 268435456 |       0 |
 +---------+----------+--------+----------+-----------+---------+
+```
+#### resources
+Information on usage of different resources in custer. See manual page on what parameter controls what resource here: https://dev.mysql.com/doc/mysql-cluster-excerpt/5.7/en/mysql-cluster-ndbinfo-resources.html
+```
+mysql> select * from resources;
++---------+---------------------+----------+------+------+-------+
+| node_id | resource_name       | reserved | used | max  | spare |
++---------+---------------------+----------+------+------+-------+
+|       1 | TRANSACTION_MEMORY  |        0 |   17 |    0 |     0 |
+|       1 | DISK_RECORDS        |        0 |    0 |    0 |     0 |
+|       1 | DATA_MEMORY         |     3136 |   11 | 3136 |     1 |
+|       1 | JOBBUFFER           |      724 |  130 |  724 |     0 |
+|       1 | FILE_BUFFERS        |     1152 | 1088 | 1152 |     0 |
+|       1 | TRANSPORTER_BUFFERS |      832 |  164 | 1040 |     0 |
+|       1 | DISK_PAGE_BUFFER    |     2240 | 2240 | 2240 |     0 |
+|       1 | QUERY_MEMORY        |        0 |    0 |    0 |     0 |
+|       1 | SCHEMA_TRANS_MEMORY |       64 |    1 |    0 |     0 |
+|       2 | TRANSACTION_MEMORY  |        0 |   18 |    0 |     0 |
+|       2 | DISK_RECORDS        |        0 |    0 |    0 |     0 |
+|       2 | DATA_MEMORY         |     3136 |   11 | 3136 |     1 |
+|       2 | JOBBUFFER           |      724 |  130 |  724 |     0 |
+|       2 | FILE_BUFFERS        |     1152 | 1088 | 1152 |     0 |
+|       2 | TRANSPORTER_BUFFERS |      832 |  137 | 1040 |     0 |
+|       2 | DISK_PAGE_BUFFER    |     2240 | 2240 | 2240 |     0 |
+|       2 | QUERY_MEMORY        |        0 |    0 |    0 |     0 |
+|       2 | SCHEMA_TRANS_MEMORY |       64 |    1 |    0 |     0 |
++---------+---------------------+----------+------+------+-------+
 ```
 
 There are many more tables that are interesting in then ndbinfo tables and we will look at some more when we have some load on the system.
