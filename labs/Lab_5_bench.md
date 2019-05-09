@@ -126,13 +126,13 @@ Another interesting table is ndbinfo.counters, this table contains a set of coun
 ```
 mysql> select * from counters;
 ```
-If you have perl installed on your server, I have created a small [perlskript](../scripts/ndbstat.pl) that takes two snapshots and prints the counters that have changed during the interal between the two snapshots.
+If you have perl installed on your server, I have created a small [perlskript](../tools/ndbstat.pl) that takes two snapshots and prints the counters that have changed during the interal between the two snapshots.
 ```
-bash$ perl ndbstat.pl --host=127.0.0.1 --port=3310 --user=root --password=root
+bash$ perl ./tools/ndbstat.pl --host=127.0.0.1 --port=3310 --user=root --password=root
 ```
-Another option is by using a SQL file with two select statements and a sleep in between like [this](../scripts/counter-stats.sql) and run it via `watch`:
+Another option is by using a SQL file with two select statements and a sleep in between like [this](../tools/counter-stats.sql) and run it via `watch`:
 ```
-bash$ watch "mysql -uroot -proot -h127.0.0.1 -P3310 < counter-stats.sql"
+bash$ watch "mysql -uroot -proot -h127.0.0.1 -P3310 < tools/counter-stats.sql"
 ```
 Re-run benchmark and look at counters table.
 
