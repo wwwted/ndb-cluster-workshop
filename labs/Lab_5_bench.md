@@ -72,7 +72,7 @@ mcm> set datamemory:ndbmtd=160M mycluster;
 
 Whilst you are waiting for configuration change to be completed you can look at rolling restart progress being completed by mcm by running:
 ```
-watch "./mcm/bin/mcm -e'show status -r mycluster'"
+watch "mcm -e'show status -r mycluster'"
 ```
 mcm will first update configuration and restart managent nodes, next restart datanodes and lastly the MySQL API nodes.
 
