@@ -29,7 +29,7 @@ Dowload workshop from github:
 ```
 git clone https://github.com/wwwted/ndb-cluster-workshop.git
 ```
-Prior to running createEnc.sh you need to download all needed SW (NDB binaries and MCM binaries) and change parameter "BIN_DIR" to where the tar.gz binary packages are located.
+Prior to running createEnv.sh you need to download all needed SW (NDB binaries and MCM binaries) and change parameter "BIN_DIR" to where the tar.gz binary packages are located.
 Go into workshop folder and run script tools/createEnv.sh
 ```
 cd ndb-cluster-workshop
