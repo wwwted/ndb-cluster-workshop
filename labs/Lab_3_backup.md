@@ -65,7 +65,7 @@ mcm> start cluster --initial --skip-init=50,51 mycluster;
 ```
 Next step is to use recover the data using *BackupId* from "list backups" statement
 ```
-mcm> restore cluster --backupid=3 --background mycluster;
+mcm> restore cluster --backupid=2 --background mycluster;
 ```
 During recovery we can follow the progress by looking at:
 ```
