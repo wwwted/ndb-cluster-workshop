@@ -171,7 +171,7 @@ You can retrieve all values for specific type of processes by adding process typ
 ```
 mcmd> get :ndbmtd mycluster;
 ```
-Types of processes can be `mysql | ndbmtd | ndb_mgm`
+Types of processes can be `mysqld | ndbmtd | ndb_mgmd`
 
 If you know the name of the parameter you can specify this also directly like:
 ```
