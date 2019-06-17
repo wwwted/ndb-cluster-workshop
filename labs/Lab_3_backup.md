@@ -73,10 +73,10 @@ mcm> show status --progressbar mycluster;
 ```
 If you want to re-run recovery just run the Disaster statement over again ;)
 
-If we do some analysis and know that only one bad SQL statement was executed, that dropped a table or a database, we can do a partial restore like:
+If we do some analysis before recover and verify that only one bad SQL statement was executed (that dropped a table or a database), we can do a partial restore like:
 ```
 mcm> restore cluster --include-databases=lab --backupid=2 mycluster;
 ```
-Above restore can be done with any need to stop/start the cluster.
+Above partitial restore can be done without having to stop/start the cluster.
 
 **[Back to Agenda](./../README.md)**
