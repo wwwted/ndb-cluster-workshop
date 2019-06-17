@@ -30,7 +30,7 @@ mysql> select * from dict_obj_info where fq_name='ted/def/test';
 +------+------+---------+-------+-----------------+---------------+--------------+
 | type | id   | version | state | parent_obj_type | parent_obj_id | fq_name      |
 +------+------+---------+-------+-----------------+---------------+--------------+
-|    2 |   10 |       1 |     4 |               0 |             0 | ted/def/test |
+|    2 |   11 |       1 |     4 |               0 |             0 | ted/def/test |
 +------+------+---------+-------+-----------------+---------------+--------------+
 ```
 There are different type of objects in the dict_obj_info table, the types can be seen in table *dict_obj_types* or by joining this table like below. Type `2` means `User Table`.
