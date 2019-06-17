@@ -39,27 +39,27 @@ mysql> select dot.type_name,doi.* from dict_obj_info doi, dict_obj_types dot whe
 +------------+------+------+---------+-------+-----------------+---------------+--------------+
 | type_name  | type | id   | version | state | parent_obj_type | parent_obj_id | fq_name      |
 +------------+------+------+---------+-------+-----------------+---------------+--------------+
-| User table |    2 |   10 |       1 |     4 |               0 |             0 | ted/def/test |
+| User table |    2 |   11 |       1 |     4 |               0 |             0 | ted/def/test |
 +------------+------+------+---------+-------+-----------------+---------------+--------------+
 ```
 If we look at all rows in table dict_obj_info we can see that when we created our test table above 5 objects where created, lets look at what rows have our table id as *parent_obj_id*.
 ```
-mysql> select dot.type_name, do2.id,do2.parent_obj_id, do2.fq_name from dict_obj_info do1, dict_obj_info do2, dict_obj_types dot where do1.id=do2.parent_obj_id and dot.type_id=do2.type and do1.id=10;
+mysql> select dot.type_name, do2.id,do2.parent_obj_id, do2.fq_name from dict_obj_info do1, dict_obj_info do2, dict_obj_types dot where do1.id=do2.parent_obj_id and dot.type_id=do2.type and do1.id=11;
 +---------------+------+---------------+--------------------+
 | type_name     | id   | parent_obj_id | fq_name            |
 +---------------+------+---------------+--------------------+
-| Ordered index |   11 |            10 | sys/def/10/PRIMARY |
-| Ordered index |   12 |            10 | sys/def/10/name    |
+| Ordered index |   12 |            11 | sys/def/10/PRIMARY |
+| Ordered index |   13 |            11 | sys/def/10/name    |
 +---------------+------+---------------+--------------------+
 ```
 As you can see there are 2 orderered indexes also created together with our table, if you dive even further you will see two index triggers that where created and are connected to our Ordered indexes above.
 ```
-mysql> select dot.type_name, do2.id,do2.parent_obj_id, do2.fq_name from dict_obj_info do1, dict_obj_info do2, dict_obj_types dot where do1.id=do2.parent_obj_id and dot.type_id=do2.type and (do1.id=11 or do1.id=12);
+mysql> select dot.type_name, do2.id,do2.parent_obj_id, do2.fq_name from dict_obj_info do1, dict_obj_info do2, dict_obj_types dot where do1.id=do2.parent_obj_id and dot.type_id=do2.type and (do1.id=12 or do1.id=13);
 +---------------+------+---------------+---------------------+
 | type_name     | id   | parent_obj_id | fq_name             |
 +---------------+------+---------------+---------------------+
-| Index trigger |    1 |            11 | NDB$INDEX_11_CUSTOM |
-| Index trigger |    2 |            12 | NDB$INDEX_12_CUSTOM |
+| Index trigger |    1 |            12 | NDB$INDEX_11_CUSTOM |
+| Index trigger |    2 |            13 | NDB$INDEX_12_CUSTOM |
 +---------------+------+---------------+---------------------+
 ```
 
