@@ -148,12 +148,12 @@ You can view the code for flexAsynch on gitub [here](https://github.com/mysql/my
  cd mysql-cluster-gpl-7.5.9
 ```
 Build the flexAsynch binaries.
-(you need to have cmake,g++, gcc, cmake, libncurses5-dev build binaries)
+(you need to have cmake, C++ compiler (gcc), ncurses, bison, boost, readline, Java SDK, NodeJS SDK)
 (replace my paths with your own before running the commands)
 ```
 mkdir 759Target
 cmake . -DCMAKE_INSTALL_PREFIX=/path/to/759target/ -DWITH_NDB_TEST=ON
-             -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/path/to/build/mysql-cluster-gpl-7.5.9/boost/
+             -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/path/to/build/mysql-cluster-gpl-7.5.9/boost/ -DWITH_NDB_JAVA_DEFAULT="0" -DWITH_NDB_NODEJS_DEFAULT="0"
 make
 make install
 ```
