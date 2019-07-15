@@ -153,7 +153,8 @@ Build the flexAsynch binaries.
 ```
 mkdir 759Target
 cmake . -DCMAKE_INSTALL_PREFIX=/path/to/759target/ -DWITH_NDB_TEST=ON
-             -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/path/to/build/mysql-cluster-gpl-7.5.9/boost/ -DWITH_NDB_JAVA_DEFAULT="0" -DWITH_NDB_NODEJS_DEFAULT="0"
+        -DDOWNLOAD_BOOST=1 -DWITH_BOOST=/path/to/build/mysql-cluster-gpl-7.5.9/boost/ 
+	-DWITH_NDB_JAVA_DEFAULT="0" -DWITH_NDB_NODEJS_DEFAULT="0"
 make
 make install
 ```
