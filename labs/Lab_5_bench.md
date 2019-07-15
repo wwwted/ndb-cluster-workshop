@@ -147,8 +147,9 @@ You can view the code for flexAsynch on gitub [here](https://github.com/mysql/my
  tar xzf mysql-cluster-gpl-7.5.9.tar.gz
  cd mysql-cluster-gpl-7.5.9
 ```
-Build the flexAsynch binaries.
-(you need to have cmake, C++ compiler (gcc), ncurses, bison, boost, readline, Java SDK, NodeJS SDK)
+To build the NDB from source (+ flexAsynch binaries), you need to have; cmake, C++ compiler (gcc), ncurses, bison, boost, readline, Java SDK, NodeJS SDK)
+
+Run commands below to build the binaries;
 (replace my paths with your own before running the commands)
 ```
 mkdir 759Target
