@@ -30,7 +30,7 @@ If you want to see what specific statements that are executed during test use op
 
 Low lets execute mysqlslap statement above!
 ```
-bash$ mysqlslap -h127.0.0.1 -P3310 -uroot -proot --auto-generate-sql --auto-generate-sql-guid-primary --auto-generate-sql-secondary-indexes=2 --auto-generate-sql-load-type=read --auto-generate-sql-write-number=200000 --auto-generate-sql-execute-number=100 --concurrency=6 --engine=ndbcluster 
+bash$ mysqlslap -h127.0.0.1 -P3310 -uroot -proot --auto-generate-sql --auto-generate-sql-guid-primary --auto-generate-sql-secondary-indexes=2 --auto-generate-sql-load-type=read --auto-generate-sql-write-number=200000 --auto-generate-sql-execute-number=10 --concurrency=6 --engine=ndbcluster 
 mysqlslap: [Warning] Using a password on the command line interface can be insecure.
 mysqlslap: Cannot run query INSERT INTO t1 VALUES (uuid(),uuid(),uuid(),964445884,'DPh7kD1E6f4MMQk1ioopsoIIcoD83DD8Wu7689K6oHTAjD3Hts6lYGv8x9G0EL0k87q8G2ExJjz2o3KhnIJBbEJYFROTpO5pNvxgyBT9nSCbNO9AiKL9QYhi0x3hL9') ERROR : The table 't1' is full
 ```
