@@ -111,10 +111,16 @@ mcm> show status -r mycluster;
 | 55     | ndbapi   | *127.0.0.1 | added   |           |            |
 +--------+----------+------------+---------+-----------+------------+
 ```
-After our cluster is up and running it's time to set some passwords for MySQL API nodes
+After our cluster is up and running it's time to set some passwords for user root on MySQL API nodes
 ```
 mysqladmin -h127.0.0.1 -P3310 -uroot password 'root'
 mysqladmin -h127.0.0.1 -P3311 -uroot password 'root'
+```
+
+Lets also create one additional user called mysql with password sakila
+```
+mysql -uroot -proot -h127.0.0.1 -P3310 -e"CREATE USER 'mysql'@'%' IDENTIFIED BY 'sakila'; GRANT ALL ON *.* TO 'mysql'@'%'"
+mysql -uroot -proot -h127.0.0.1 -P3311 -e"CREATE USER 'mysql'@'%' IDENTIFIED BY 'sakila'; GRANT ALL ON *.* TO 'mysql'@'%'"
 ```
 
 #### Automate the configuration/start of cluster (Not part of workshop)
