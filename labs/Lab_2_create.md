@@ -15,10 +15,10 @@ If you want to see help run `./mcm_bin/bin/mcm --help`,
 our reference manual can be found [here](https://dev.mysql.com/doc/mysql-cluster-manager/1.4/en/mcm-cluster-commands.html).
 
 ```
-./mcm_bin/bin/mcm
+mcm
 ```
 
-If you want mcm client to remotely connect to a mcmd daemon you can provide option `-a`, the argument to provide is `host:port`. For above client connect we can use `./mcm/bin/mcm -a localhost:1862` and provide default values if we want.
+If you want mcm client to remotely connect to a mcmd daemon you can provide option `-a`, the argument to provide is `host:port`. For above client connect we can use `mcm -a localhost:1862` and provide default values if we want.
 
 
 Once connected you can look at all commands available by running:
