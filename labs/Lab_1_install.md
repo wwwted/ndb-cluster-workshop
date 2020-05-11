@@ -8,7 +8,7 @@ Steps below need to be done on all servers that are to be part of the MySQL Clus
 
 ### Target environment for HOL
 ```
-/home/<user>/ndb-cluster-workshop/
+/home/<user>/workshop/
                      cluster-7XX/ (replace X with real version number)
                      mcm1.X.X/
                      ndb_bin -> /home/<user>/MCM_LAB/cluster-7XX/
