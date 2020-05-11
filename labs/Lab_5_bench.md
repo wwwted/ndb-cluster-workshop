@@ -14,7 +14,7 @@ Mysqlslap is a simple benchmark program that works for normal MySQL and for MySQ
 
 Mysqlslap have same standard options for connecting as the MySQL Client, we will run command below.
 ```
-bash$ mysqlslap -h127.0.0.1 -P3310 -uroot -proot --auto-generate-sql --auto-generate-sql-guid-primary --auto-generate-sql-secondary-indexes=2 --auto-generate-sql-load-type=read --auto-generate-sql-write-number=200000 --auto-generate-sql-execute-number=100 --concurrency=6 --engine=ndbcluster
+bash$ mysqlslap -h127.0.0.1 -P3310 -uroot -proot --auto-generate-sql --auto-generate-sql-guid-primary --auto-generate-sql-secondary-indexes=2 --auto-generate-sql-load-type=read --auto-generate-sql-write-number=200000 --auto-generate-sql-execute-number=20 --concurrency=6 --engine=ndbcluster
 ```
 You can read about the option in the output from `mysqlslap --help` or in our [manual](https://dev.mysql.com/doc/refman/5.7/en/mysqlslap.html).
 
