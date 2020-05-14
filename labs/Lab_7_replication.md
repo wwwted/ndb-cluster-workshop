@@ -60,7 +60,7 @@ Look at commands in file `mcm-templates/replication-cluster`
 
 Next step is to start replication from MySQL-53316 -> MySQL-53326
 ```
-./scripts/start-replication.sh
+./replication-scripts/start-replication.sh
 ```
 Look at commands in script `scripts/start-replication.sh`
 
@@ -110,7 +110,7 @@ In this small test we see that batching works well when enabled, the value of Nd
 
 Run channel cut-over from MySQL-53316 -> MySQL-53326 to MySQL-53317 -> MySQL-53327
 ```
-./scripts/chanel-cut-over.sh
+./replication-scripts/chanel-cut-over.sh
 ```
 Remember to only have one replication channel active at any point in time, otherwice there will be problem!
 
