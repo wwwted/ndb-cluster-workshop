@@ -10,6 +10,7 @@ NDB_BIN="/home/opc/mysql-cluster-gpl-7.6.14-linux-glibc2.12-x86_64.tar.gz"
 MCM_BIN="/home/opc/mcm-1.4.8-linux-glibc2.12-x86-64bit.tar.gz"
 
 # You should not have to change anything below (only if you change binary versions)
+mkdir $TARGET_DIR
 cd $TARGET_DIR
 
 if [ ! -f "$NDB_BIN" ]
