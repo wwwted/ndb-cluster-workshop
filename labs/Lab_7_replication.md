@@ -62,7 +62,7 @@ Next step is to start replication from MySQL-53316 -> MySQL-53326
 ```
 ./replication-scripts/start-replication.sh
 ```
-Look at commands in script `scripts/start-replication.sh`
+Look at commands in script `replication-scripts/start-replication.sh`
 
 Import some data on MySQL node in Site-1
 ```
