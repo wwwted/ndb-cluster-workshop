@@ -138,6 +138,7 @@ add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
 add process --processhosts=ndbapi@127.0.0.1,ndbapi@127.0.0.1 mycluster;
 set port:mysqld:50=3310 mycluster;
 set port:mysqld:51=3311 mycluster;
+set StopOnError:ndbmtd=0 mycluster;
 ```
 Copy commands above into a file mcm.cmds or download file from [here](https://gist.github.com/wwwted/1ee83009d7344c1348aae41df655d839).
 
