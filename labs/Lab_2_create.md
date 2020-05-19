@@ -71,6 +71,10 @@ You might wonder about the number `50`and `51`, these are so called Node ID that
 mcm> set port:mysqld:50=3310 mycluster;
 mcm> set port:mysqld:51=3311 mycluster;
 ```
+When using MCM to manage NDB we also suggest to set ```StopOnError=0``` so mcmd can restart failed data nodes.
+```
+mcm> set StopOnError:ndbmtd=0 mycluster;
+```
 
 #### Start Cluster
 
