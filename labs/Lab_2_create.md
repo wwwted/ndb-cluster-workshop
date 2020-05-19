@@ -5,7 +5,7 @@
 
 In this exercise we are going to configure and start the cluster. This can be done from any server, even remotely as long as you can connect to one of the mcmd daemons running on your cluster servers installed earlier.
 
-Attention:
+!!Attention!!
 > Remember to set the PATH env varaible manualy or by using `bash>. ./setenv` before trying to start mcm client, mcm client  need to find the mysql client.
 
 #### The MCM client
