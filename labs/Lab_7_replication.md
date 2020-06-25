@@ -45,6 +45,7 @@ Very important to be aware of:
 - make sure you configure cluster so node groups are spanning both DC as seen in picture above.
 
 This architecture is best used if you have reliable and low latency connectivity between the 2 DC.
+Also important to note that some of the latency problem can be worked around if your application is multi-threaded.
 
 Creating two Cluster with replication
 ---------------
