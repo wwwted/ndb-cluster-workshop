@@ -19,6 +19,10 @@ More information in our manual [here](https://dev.mysql.com/doc/refman/5.7/en/my
 | DataNode3  DataNode4 |                       | DataNode3    DataNode4 |  Node Group 2
 ------------------------                       --------------------------
 ```
+
+With this architecture there no problems with latency between DC's but you need to manually setup asyncronous replication as descibed bellow.
+This is our standard architecture of achiving a failover site for disaster recovery.
+
 ##### One stretched cluster
 ```
          DC1                                           DC2
@@ -32,6 +36,14 @@ More information in our manual [here](https://dev.mysql.com/doc/refman/5.7/en/my
 -------------------------------------------------------------------------
  
 ```
+
+This is basically one cluster strecthed over 2 DC.
+
+Very important to be aware of:
+- this architecture will impact your resonce times if the latency is high between the 2 DC.
+- make sure you configure cluster so node groups are spanning both DC as seen in picture above.
+
+This architecure is best used if you have reliable and low latency connnectivity between the 2 DC.
 
 Creating two Cluster with replication
 ---------------
