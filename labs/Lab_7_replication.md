@@ -21,6 +21,7 @@ More information in our manual [here](https://dev.mysql.com/doc/refman/5.7/en/my
 ```
 
 With this architecture there no problems with latency between DC's but you need to manually setup asynchronous replication as described bellow.
+Best practices is to have dedicated MySQL API nodes for replication (2 on each site for redundancy and channel cut-over).
 This is our standard architecture of achieving a failover site for disaster recovery.
 
 ##### One stretched cluster
