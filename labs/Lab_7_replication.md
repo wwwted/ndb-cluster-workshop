@@ -50,6 +50,13 @@ Also important to note that some of the latency problem can be worked around if 
 Creating two Cluster with replication
 ---------------
 
+Update 2022-09-09: Scripts and templates for NDB version 8.0.30 have been added to the workshop folders, these files are named "-80".
+
+Noteworthy changes in NDB 8.0:
+- NodeID ranges for data nodes have changed from 1-48 to 1-144
+- New password plugin requires get_master_public_key=1 in CHANGE MASTER command
+- To enable binary logging you need to set ndb_log_bin=ON
+
 #### Active/Passive setup
 
 Target toplogy:
@@ -124,7 +131,7 @@ In this small test we see that batching works well when enabled, the value of Nd
 
 Run channel cut-over from MySQL-53316 -> MySQL-53326 to MySQL-53317 -> MySQL-53327
 ```
-./replication-scripts/chanel-cut-over.sh
+./replication-scripts/channel-cut-over.sh
 ```
 Remember to only have one replication channel active at any point in time, otherwice there will be problem!
 
