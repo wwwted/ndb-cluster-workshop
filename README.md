@@ -1,6 +1,6 @@
 Welcome to the MySQL NDB Cluster Workshop!
 ===================
-![icon](https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/124px-MySQL.svg.png)
+![icon](https://dev.mysql.com/blog-archive/mysqlhighavailability/wp-content/uploads/2015/12/MySQL_Cluster-300x125.png)
 
 In this workshop, you will learn about MySQL Cluster. This workshop is a blend of presentation and hands-on work.
 The presentations can be found in [docs](./docs) folder and hands on work in [labs](./labs) folder. There are some small scripts that are usefull for looking at data in ndbinfo in the [tools](./tools) folder.
