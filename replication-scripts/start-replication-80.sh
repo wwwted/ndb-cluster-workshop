@@ -27,7 +27,7 @@ change master to
 	master_port=53316,
 	master_user='rep',
 	master_password='rep',
-  get_master_public_key=1,
+	get_master_public_key=1,
 	master_log_file="$LOGFILE",
 	master_log_pos=$LOGPOS;
 EOL
