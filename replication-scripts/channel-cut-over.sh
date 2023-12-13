@@ -50,7 +50,8 @@ change master to
 	master_user='rep',
 	master_password='rep',
 	master_log_file="$LOGFILE",
-	master_log_pos=$LOGPOS;
+	master_log_pos=$LOGPOS,
+ 	get_master_public_key=1;
 EOL
 
 # start replication
