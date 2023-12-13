@@ -28,8 +28,7 @@ change master to
 	master_user='rep',
 	master_password='rep',
 	master_log_file="$LOGFILE",
-	master_log_pos=$LOGPOS,
- 	get_master_public_key=1;
+	master_log_pos=$LOGPOS;
 EOL
 
 # Add grants needed for replication on masters (Cluster-1)
