@@ -32,8 +32,10 @@ read
 epoch=`mysql -uroot -h127.0.0.1 -P53327 -se"SELECT MAX(epoch) FROM mysql.ndb_apply_status\G" |grep epoch| cut -f2 -d:|sed  "s/ //g"`
 [ -z $epoch ] && echo "epoch empty, exiting.." && exit 1
 
-LOGFILE=`mysql -uroot -h127.0.0.1 -P53317 -se"SELECT SUBSTRING_INDEX(next_file, '/', -1), next_position FROM mysql.ndb_binlog_index WHERE epoch >= $epoch ORDER BY epoch ASC LIMIT 1\G" |grep next_file|cut -f2 -d:|sed  "s/ //g"`
-LOGPOS=`mysql -uroot -h127.0.0.1 -P53317 -se"SELECT SUBSTRING_INDEX(next_file, '/', -1), next_position FROM mysql.ndb_binlog_index WHERE epoch >= $epoch ORDER BY epoch ASC LIMIT 1\G" |grep next_position|cut -f2 -d:|sed  "s/ //g"`
+#LOGFILE=`mysql -uroot -h127.0.0.1 -P53317 -se"SELECT SUBSTRING_INDEX(next_file, '/', -1), next_position FROM mysql.ndb_binlog_index WHERE epoch >= $epoch ORDER BY epoch ASC LIMIT 1\G" |grep next_file|cut -f2 -d:|sed  "s/ //g"`
+#LOGPOS=`mysql -uroot -h127.0.0.1 -P53317 -se"SELECT SUBSTRING_INDEX(next_file, '/', -1), next_position FROM mysql.ndb_binlog_index WHERE epoch >= $epoch ORDER BY epoch ASC LIMIT 1\G" |grep next_position|cut -f2 -d:|sed  "s/ //g"`
+LOGFILE=`mysql -uroot -h127.0.0.1 -P53317 -se"SELECT SUBSTRING_INDEX(next_file, '/', -1), next_position FROM mysql.ndb_binlog_index WHERE epoch = $epoch\G" |grep next_file|cut -f2 -d:|sed  "s/ //g"`
+LOGPOS=`mysql -uroot -h127.0.0.1 -P53317 -se"SELECT SUBSTRING_INDEX(next_file, '/', -1), next_position FROM mysql.ndb_binlog_index WHERE epoch = $epoch\G" |grep next_position|cut -f2 -d:|sed  "s/ //g"`
 
 echo "Epoch from 53327 = ($epoch), LOGFILE and LOGPOS fetched from 53317; LOGFILE=($LOGFILE) LOGPOS=($LOGPOS)"
 echo "press <ENTER> to continue"
